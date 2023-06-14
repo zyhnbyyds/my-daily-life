@@ -1,8 +1,9 @@
-<script setup lang="ts">
-</script>
+<script lang='ts' setup></script>
 
 <template>
-  <div>
-    nihao
+  <div class="m-auto lg:w-10/12 sm:w-full">
+    <Header />
   </div>
 </template>
+
+<style scoped></style>

@@ -1,18 +1,28 @@
-import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
-    '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    '@vite-pwa/nuxt',
+    '@nuxt/content',
   ],
 
+  content: {
+    documentDriven: true,
+    sources: {
+      github: {
+        prefix: '/blog', // Prefix for routes used to query contents
+        driver: 'github', // Driver used to fetch contents (view unstorage documentation)
+        repo: 'https://github.com/zhang771/my-blob-md',
+        branch: 'main',
+        dir: 'content',
+        token: 'helloToken',
+      },
+    },
+  },
+
   experimental: {
-    // when using generate, payload js assets included in sw precache manifest
-    // but missing on offline, disabling extraction it until fixed
     payloadExtraction: false,
     inlineSSRStyles: false,
     renderJsonPayloads: true,
@@ -54,8 +64,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-
-  pwa,
 
   devtools: {
     enabled: true,

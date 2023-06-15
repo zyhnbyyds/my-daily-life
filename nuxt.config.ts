@@ -10,16 +10,6 @@ export default defineNuxtConfig({
 
   content: {
     documentDriven: true,
-    sources: {
-      github: {
-        prefix: '/blog', // Prefix for routes used to query contents
-        driver: 'github', // Driver used to fetch contents (view unstorage documentation)
-        repo: 'https://github.com/zhang771/my-blob-md',
-        branch: 'main',
-        dir: 'content',
-        token: 'helloToken',
-      },
-    },
   },
 
   experimental: {

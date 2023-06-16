@@ -1,11 +1,11 @@
 <script lang='ts' setup>
 definePageMeta({
-  layout: 'default',
+  layout: 'life',
 })
 </script>
 
 <template>
-  <Nuxtpage />
+  <div />
 </template>
 
 <style scoped></style>

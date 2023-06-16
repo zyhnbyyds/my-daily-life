@@ -4,14 +4,12 @@ const { data: blobData } = await useAsyncData('blobData', () => queryContent(pat
 </script>
 
 <template>
-  <div>
-    <ContentRenderer :value="blobData === null ? {} : blobData">
-      <ContentRendererMarkdown :value="blobData === null ? {} : blobData" />
-      <template #empty>
-        <p>No content found.</p>
-      </template>
-    </ContentRenderer>
-  </div>
+  <ContentRenderer :value="blobData === null ? {} : blobData">
+    <ContentRendererMarkdown :value="blobData === null ? {} : blobData" />
+    <template #empty>
+      <p>No content found.</p>
+    </template>
+  </ContentRenderer>
 </template>
 
 <style scoped></style>

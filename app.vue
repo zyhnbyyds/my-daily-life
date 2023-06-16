@@ -10,21 +10,35 @@ useSeoMeta({
   description: '关于我个人生活的简单介绍，对于生活类的',
   twitterCard: 'summary_large_image',
 })
+
+const paths = reactive([
+  {
+    label: '生活',
+    value: '/life',
+  },
+  {
+    label: '博客',
+    value: '/blob',
+  },
+])
+const activeIndex = ref<string>('/life')
+
+function handleChange(path: string) {
+  activeIndex.value = path
+}
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div class="px-4">
+    <Header :paths="paths" @change="handleChange" />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    <Footer />
+  </div>
 </template>
 
 <style>
-html, body , #__nuxt{
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
 html.dark {
   background: #222;
   color: white;

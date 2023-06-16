@@ -17,15 +17,11 @@ function handleChange(path: string) {
 </script>
 
 <template>
-  <div class="m-auto lg:w-10/12 sm:w-full">
+  <div>
     <Header :paths="paths" @change="handleChange" />
-    <ContentList v-slot="{ list }" :path="activeIndex">
-      <div v-for="item, i in list" :key="i">
-        <RouterLink :to="item._path">
-          {{ item.title }}
-        </RouterLink>
-      </div>
-    </ContentList>
+    <main class="m-auto mt-2 lg:w-10/12 sm:w-full">
+      <slot />
+    </main>
   </div>
 </template>
 

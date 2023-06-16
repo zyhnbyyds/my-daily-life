@@ -5,7 +5,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div>首页</div>
+  <div>博客</div>
 </template>
 
 <style scoped></style>

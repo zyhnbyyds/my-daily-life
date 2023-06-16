@@ -1,6 +1,8 @@
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
+  extends: '@nuxt-themes/typography',
+
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
@@ -9,7 +11,14 @@ export default defineNuxtConfig({
   ],
 
   content: {
-    documentDriven: true,
+    documentDriven: false,
+    highlight: {
+      theme: {
+        default: 'github-dark',
+        dark: 'github-dark',
+        light: 'github-dark',
+      },
+    },
   },
 
   experimental: {
@@ -17,10 +26,6 @@ export default defineNuxtConfig({
     inlineSSRStyles: false,
     renderJsonPayloads: true,
   },
-
-  css: [
-    '@unocss/reset/tailwind.css',
-  ],
 
   colorMode: {
     classSuffix: '',

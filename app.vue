@@ -7,7 +7,7 @@ useHead({
 
 useSeoMeta({
   title: '我的生活日记',
-  description: '关于我个人生活的简单介绍，对于生活类的',
+  description: '我的生活日记, 博客, 生活, blob daily life',
   twitterCard: 'summary_large_image',
 })
 

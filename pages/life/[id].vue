@@ -4,6 +4,7 @@ const { data: blobData } = await useAsyncData('blobData', () => queryContent(pat
 </script>
 
 <template>
+  <BackTo :parent-path="path" />
   <ContentRenderer :value="blobData === null ? {} : blobData">
     <ContentRendererMarkdown :value="blobData === null ? {} : blobData" />
     <template #empty>

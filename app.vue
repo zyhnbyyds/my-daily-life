@@ -13,6 +13,10 @@ useSeoMeta({
 
 const paths = reactive([
   {
+    label: '首页',
+    value: '/home',
+  },
+  {
     label: '生活',
     value: '/life',
   },
@@ -21,16 +25,11 @@ const paths = reactive([
     value: '/blob',
   },
 ])
-const activeIndex = ref<string>('/life')
-
-function handleChange(path: string) {
-  activeIndex.value = path
-}
 </script>
 
 <template>
-  <div class="px-4">
-    <Header :paths="paths" @change="handleChange" />
+  <div class="px-4 font-serif font-500">
+    <Header :paths="paths" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

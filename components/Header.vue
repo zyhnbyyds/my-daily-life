@@ -27,7 +27,9 @@ function handleChangeTab(path: string) {
             </NuxtLink>
           </div>
         </div>
-        <DarkToggle />
+        <div>
+          <ContactMe />
+        </div>
       </div>
     </div>
   </div>

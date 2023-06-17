@@ -1,7 +1,9 @@
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
-  extends: '@nuxt-themes/typography',
+  extends: [
+    '@nuxt-themes/typography',
+  ],
 
   modules: [
     '@vueuse/nuxt',
@@ -9,16 +11,15 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/content',
     'nuxt-typed-router',
-    '@nuxthq/ui',
   ],
 
   content: {
     documentDriven: false,
     highlight: {
       theme: {
-        default: 'github-dark',
-        dark: 'github-dark',
-        light: 'github-light',
+        default: 'one-dark-pro',
+        dark: 'one-dark-pro',
+        light: 'one-dark-pro',
       },
     },
   },

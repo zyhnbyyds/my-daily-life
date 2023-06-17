@@ -28,7 +28,7 @@ const paths = reactive([
 </script>
 
 <template>
-  <div class="px-4 font-serif font-500">
+  <div class="px-4 font-serif">
     <Header :paths="paths" />
     <NuxtLayout>
       <NuxtPage />

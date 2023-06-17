@@ -8,7 +8,7 @@ const { data: navigation } = await useAsyncData('navigation', () => {
 <template>
   <main class="m-auto mt-2 lg:w-10/12 sm:w-full">
     <div class="lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1" grid="~ gap-4">
-      <div v-for="item, i in (navigation ? navigation[0].children : [])" :key="i" class="h-60 cursor-pointer rounded-md bg-light-700 p-3 transition-transform dark:bg-dark-50" hover="scale-105">
+      <div v-for="item, i in (navigation ? navigation[0].children : [])" :key="i" class="h-60 cursor-pointer rounded-md bg-light-700 p-3 transition-transform dark:bg-dark-50" hover="scale-102">
         <NuxtLink :to="item._path">
           <h2 class="mb-2.5">
             {{ item.title }}

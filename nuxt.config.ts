@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/content',
     'nuxt-typed-router',
+    '@nuxthq/ui',
   ],
 
   content: {
@@ -17,7 +18,7 @@ export default defineNuxtConfig({
       theme: {
         default: 'github-dark',
         dark: 'github-dark',
-        light: 'github-dark',
+        light: 'github-light',
       },
     },
   },

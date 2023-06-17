@@ -25,19 +25,31 @@ const paths = reactive([
     value: '/blob',
   },
 ])
+
+const toTopRef = ref<HTMLElement>()
+const { y } = useScroll(toTopRef, { behavior: 'smooth' })
 </script>
 
 <template>
-  <div class="px-4 font-serif">
+  <div ref="toTopRef" class="h-full overflow-y-scroll px-4 font-mono">
     <Header :paths="paths" />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <div>
+      <NuxtLayout>
+        <ToTop :top="y" @go-top="y = 0" />
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
     <Footer />
   </div>
 </template>
 
 <style>
+html,
+body,
+#__nuxt {
+  height: 100%;
+}
+
 html.dark {
   background: #222;
   color: white;

@@ -1,6 +1,10 @@
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
+  typescript: {
+    shim: true,
+  },
+
   extends: [
     '@nuxt-themes/typography',
   ],

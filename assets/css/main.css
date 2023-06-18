@@ -4,6 +4,10 @@ body,
   height: 100%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html.dark {
   background: #444;
   color: #ffffee;
@@ -11,4 +15,22 @@ html.dark {
 
 tbody td {
   text-align: center;
+}
+
+.scrool-style::-webkit-scrollbar {
+  display: block;
+  background: var(--color-gray-100);
+  width: 8px;
+}
+.scrool-style::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: 4px;
+}
+
+html.dark .scrool-style::-webkit-scrollbar {
+  background: var(--color-gray-600);
+}
+
+html.dark .scrool-style::-webkit-scrollbar-thumb {
+  background: var(--color-gray-500);
 }

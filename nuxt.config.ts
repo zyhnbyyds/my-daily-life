@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     highlight: {
       theme: {
         default: 'vitesse-light',
-        dark: 'vitesse-dark',
+        dark: 'github-dark',
         light: 'vitesse-light',
       },
     },

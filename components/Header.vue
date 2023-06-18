@@ -21,9 +21,9 @@ function handleChangeTab(path: string) {
 
 <template>
   <div class="flex justify-center py-4 font-600">
-    <div class="inline-flex rounded-6 bg-#fff px-5 py-3 shadow-md dark:bg-#333 dark:bg-opacity-40">
-      <div v-for="item, i in props.paths" :key="i" :class="activeIndex === item.value ? 'text-#1ad6ff' : ''">
-        <NuxtLink class="cursor-pointer rounded-3 px-3 py-1 text-center" hover="bg-#e5e5e5 bg-opacity-20" :to="item.value" @click="handleChangeTab(item.value)">
+    <div class="relative inline-flex rounded-6 bg-#fff px-5 py-3 shadow-md dark:bg-#333 dark:bg-opacity-40">
+      <div v-for="item, i in props.paths" :key="i">
+        <NuxtLink :class="activeIndex === item.value ? 'text-#1ad6ff' : ''" class="rounded-3 px-3 py-1 text-center" hover="bg-#e5e5e5 bg-opacity-20" :to="item.value" @click="handleChangeTab(item.value)">
           {{ item.label }}
         </NuxtLink>
       </div>

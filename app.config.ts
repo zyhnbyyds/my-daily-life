@@ -5,5 +5,5 @@ export default defineAppConfig({
     },
   },
   /** 页面滚动多少时展示返回顶部 */
-  pageScroolTop: 300,
+  pageScroolTop: 600,
 })

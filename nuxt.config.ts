@@ -26,6 +26,11 @@ export default defineNuxtConfig({
         light: 'one-dark-pro',
       },
     },
+    markdown: {
+      tags: {
+        Card: 'Card',
+      },
+    },
   },
 
   experimental: {
@@ -70,4 +75,8 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+
+  css: [
+    '@/assets/css/main.css',
+  ],
 })

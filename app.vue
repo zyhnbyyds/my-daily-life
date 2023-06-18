@@ -31,7 +31,7 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
 </script>
 
 <template>
-  <div ref="toTopRef" class="h-full overflow-y-scroll px-4 font-mono">
+  <div ref="toTopRef" class="h-full w-full overflow-y-auto px-4 font-mono">
     <Header :paths="paths" />
     <div>
       <NuxtLayout>
@@ -39,7 +39,6 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
         <NuxtPage />
       </NuxtLayout>
     </div>
-    <Footer />
   </div>
 </template>
 

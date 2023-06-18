@@ -10,7 +10,7 @@ title: '表单相关api的统一hooks封装(表单数据的增删改查)'
 
 (1) 定义串口参数接口
 
-```typescript
+```typescript [code]
 /** 接收的查询接口参数,默认有pageSize和pageNum */
 interface PageFormOptions {
   pageSize?: number;
@@ -21,7 +21,7 @@ interface PageFormOptions {
 
 (2) 定义增删改查接口参数类型
 
-```typescript
+```typescript [code]
 // 此处接收的泛型T用于定义表单数据源的类型
 type PromiseResult<T = any> = Promise<Service.FailedResult | Service.SuccessResult<T>>;
 
@@ -36,20 +36,20 @@ interface PageTableParams<T> {
 
 (3) 表单状态加载和模态框的变量定义，通过ref实现(此处调用了一个useBoolean函数--简单的赋值操作封装)
 
-```typescript
+```typescript [code]
 const { setFalse: stopLoading, setTrue: startLoading, bool: loading } = useBoolean();
 const { setFalse: modalHide, setTrue: modalShow, bool: modalVisile } = useBoolean();
 ```
 
 (4) 表单数据源存储定义
 
-```typescript
+```typescript [code]
 const tableOrigin = ref<T>();
 ```
 
 (5) 获取表单数据列表操作
 
-```typescript
+```typescript [code]
 async function getListFn() {
     startLoading();
     const { data, error } = await params.GetApiFn(apiFnParams);
@@ -62,7 +62,7 @@ async function getListFn() {
 
 (6) 修改、删除、添加等(代码会放到最后，耦合较多，不作展示)
 
-```typescript
+```typescript [code]
 async function addListFn(args: unknown) {
     if (!params.AddApiFn) return;
     const { error } = await params.AddApiFn(args);
@@ -76,7 +76,7 @@ async function addListFn(args: unknown) {
 
 (7) 结尾导出页面中要使用的变量和函数
 
-```typescript
+```typescript [code]
 return {
     getListFn,
     apiFnParams,
@@ -95,7 +95,7 @@ return {
 
 ## 3. 界面使用(demo)
 
-```typescript
+```typescript [code]
 const { loading, getListFn, tableOrigin, addListFn, editListFn, deleteListFn, modalHide, modalShow, modalVisile } =
   usePageTable<ApiFrp.FrpMap[]>({
     GetApiFn: fetchGetFrpMapList,
@@ -106,17 +106,13 @@ const { loading, getListFn, tableOrigin, addListFn, editListFn, deleteListFn, mo
 
 ```
 
-
-
-
-
 ## 3. 总结
 
 ​		此处封装的还是有些许简陋，后面还会对查询参数做一些调整，以及细节的补充。其实表单封装更多还是，针对某一些耦合度较高的增删改查表单，减少代码量和代码冗余而做的努力。如果说是比较复杂的表单，其实做统一封装的难度较大。可以做单独特殊的处理。 
 
 ## 4.代码(usePageTable.ts)
 
-```typescript
+```typescript [usePageTable.ts]
 import { reactive, ref } from 'vue';
 import { useBoolean } from '@/hooks';
 

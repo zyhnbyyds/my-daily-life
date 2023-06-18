@@ -13,6 +13,7 @@ export default defineConfig({
   shortcuts: [
     ['flex-center', 'flex justify-center items-center'],
     ['bg-my-20', 'bg-#e5e5e5 bg-opacity-20'],
+    ['lm', 'min-w-960px'],
   ],
   presets: [
     presetUno(),

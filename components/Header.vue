@@ -9,7 +9,10 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const activeIndex = ref<string>('/home')
+
+const { path } = useRoute()
+
+const activeIndex = ref<string>(handlePathGetFirst(path))
 
 function handleChangeTab(path: string) {
   activeIndex.value = path
@@ -17,18 +20,14 @@ function handleChangeTab(path: string) {
 </script>
 
 <template>
-  <div class="m-auto h-60px lg:w-10/12 sm:w-full">
-    <div class="h-full items-center justify-between" flex="~">
-      <div class="flex justify-around font-600">
-        <div v-for="item, i in props.paths" :key="i" :class="activeIndex === item.value ? 'text-#1ad6ff' : ''">
-          <NuxtLink class="cursor-pointer rounded-2 px-3 py-1 text-center" hover="bg-#e5e5e5 bg-opacity-20" :to="item.value" @click="handleChangeTab(item.value)">
-            {{ item.label }}
-          </NuxtLink>
-        </div>
+  <div class="my-4 flex justify-center font-600">
+    <div class="inline-flex rounded-6 bg-#fff px-5 py-3 shadow-md dark:bg-#333 dark:bg-opacity-40">
+      <div v-for="item, i in props.paths" :key="i" :class="activeIndex === item.value ? 'text-#1ad6ff' : ''">
+        <NuxtLink class="cursor-pointer rounded-3 px-3 py-1 text-center" hover="bg-#e5e5e5 bg-opacity-20" :to="item.value" @click="handleChangeTab(item.value)">
+          {{ item.label }}
+        </NuxtLink>
       </div>
-      <div>
-        <ContactMe />
-      </div>
+      <DarkToggle class="mx-2" />
     </div>
   </div>
 </template>

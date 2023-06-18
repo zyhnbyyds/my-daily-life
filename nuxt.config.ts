@@ -21,9 +21,9 @@ export default defineNuxtConfig({
     documentDriven: false,
     highlight: {
       theme: {
-        default: 'one-dark-pro',
-        dark: 'one-dark-pro',
-        light: 'one-dark-pro',
+        default: 'vitesse-light',
+        dark: 'vitesse-dark',
+        light: 'vitesse-light',
       },
     },
     markdown: {

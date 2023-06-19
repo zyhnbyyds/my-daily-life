@@ -1,11 +1,14 @@
 <script lang='ts' setup>
 definePageMeta({
   layout: 'blob',
+  key(route) {
+    return route.path
+  },
 })
 </script>
 
 <template>
-  <NuxtPage />
+  <div />
 </template>
 
 <style scoped></style>

@@ -3,7 +3,18 @@ const { path } = useRoute()
 const { data } = await useAsyncData('data', () => queryContent(path).findOne())
 
 const { data: nextData } = await useAsyncData('nextData', () => {
-  return queryContent().only(['title', '_path']).findSurround(path)
+  return queryContent().only(['title', '_path']).findSurround(path).then((data) => {
+    return data.map((item) => {
+      if (item === null)
+        return null
+      if (handlePathGetFirst(path) !== handlePathGetFirst(item._path))
+        return null
+      return {
+        _path: item._path,
+        title: item.title,
+      }
+    })
+  })
 })
 </script>
 

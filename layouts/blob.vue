@@ -1,6 +1,6 @@
 <script lang='ts' setup>
 const { data: blobDataList } = await useAsyncData('blobDataList', () => {
-  return queryContent('blob').find()
+  return queryContent('blob').only(['_path', 'title', 'createTime']).find()
 })
 </script>
 

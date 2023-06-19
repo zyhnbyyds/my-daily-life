@@ -17,20 +17,21 @@ tbody td {
   text-align: center;
 }
 
-.scrool-style::-webkit-scrollbar {
+.scrool-style::-webkit-scrollbar, pre::-webkit-scrollbar {
   display: block;
   background: var(--color-gray-100);
+  height: 8px;
   width: 8px;
 }
-.scrool-style::-webkit-scrollbar-thumb {
+.scrool-style::-webkit-scrollbar-thumb, pre::-webkit-scrollbar-thumb {
   background: var(--color-gray-300);
   border-radius: 4px;
 }
 
-html.dark .scrool-style::-webkit-scrollbar {
+html.dark .scrool-style::-webkit-scrollbar, html.dark pre::-webkit-scrollbar {
   background: var(--color-gray-600);
 }
 
-html.dark .scrool-style::-webkit-scrollbar-thumb {
+html.dark .scrool-style::-webkit-scrollbar-thumb, html.dark pre::-webkit-scrollbar-thumb{
   background: var(--color-gray-500);
 }

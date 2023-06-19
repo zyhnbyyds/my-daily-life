@@ -1,6 +1,10 @@
 <script lang='ts' setup>
 const { path } = useRoute()
 const { data } = await useAsyncData('data', () => queryContent(path).findOne())
+
+const { data: nextData } = await useAsyncData('nextData', () => {
+  return queryContent().only(['title', '_path']).findSurround(path)
+})
 </script>
 
 <template>
@@ -13,7 +17,7 @@ const { data } = await useAsyncData('data', () => queryContent(path).findOne())
           <p>No content found.</p>
         </template>
       </ContentRenderer>
-      <NextPageBtn />
+      <NextPageBtn :pre="nextData ? nextData[0] : null" :next="nextData ? nextData[1] : null" />
     </div>
   </div>
 </template>

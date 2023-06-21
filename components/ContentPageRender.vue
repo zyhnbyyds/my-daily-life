@@ -2,18 +2,27 @@
 const { path } = useRoute()
 const { data } = await useAsyncData('data', () => queryContent(path).findOne())
 
+useSeoMeta({
+  title: data.value?.title,
+  description: data.value?.desc,
+})
+
 const { data: nextData } = await useAsyncData('nextData', () => {
-  return queryContent().only(['title', '_path']).findSurround(path).then((data) => {
-    return data.map((item) => {
-      if (item === null)
-        return null
-      if (handlePathGetFirst(path) !== handlePathGetFirst(item._path))
-        return null
-      return {
-        _path: item._path,
-        title: item.title,
-      }
-    })
+  return queryContent().only(['title', '_path']).findSurround(path)
+})
+
+const nextDataTransformed = computed(() => {
+  if (!nextData.value)
+    return
+  return nextData.value.map((item) => {
+    if (item === null)
+      return null
+    if (handlePathGetFirst(path) !== handlePathGetFirst(item._path))
+      return null
+    return {
+      _path: item._path,
+      title: item.title,
+    }
   })
 })
 </script>
@@ -28,7 +37,7 @@ const { data: nextData } = await useAsyncData('nextData', () => {
           <p>No content found.</p>
         </template>
       </ContentRenderer>
-      <NextPageBtn :pre="nextData ? nextData[0] : null" :next="nextData ? nextData[1] : null" />
+      <NextPageBtn :pre="nextDataTransformed ? nextDataTransformed[0] : null" :next="nextDataTransformed ? nextDataTransformed[1] : null" />
     </div>
   </div>
 </template>

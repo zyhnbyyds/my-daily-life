@@ -8,7 +8,6 @@ useHead({
 useSeoMeta({
   title: '我的生活日记',
   description: '我的生活日记, 博客, 生活, blob daily life',
-  twitterCard: 'summary_large_image',
 })
 
 const paths = reactive([
@@ -32,14 +31,24 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
 
 <template>
   <div class="h-full w-full font-mono">
+    <NuxtLoadingIndicator :height="3" />
     <Header :paths="paths" />
     <div ref="toTopRef" class="scrool-style h-[calc(100vh-5rem)] overflow-y-auto pb-5">
       <NuxtLayout>
         <ToTop :top="y" @go-top="y = 0" />
-        <NuxtPage />
+        <NuxtPage :page-key="$route.fullPath" />
       </NuxtLayout>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

@@ -26,11 +26,6 @@ export default defineNuxtConfig({
         light: 'vitesse-light',
       },
     },
-    markdown: {
-      tags: {
-        Card: 'Card',
-      },
-    },
   },
 
   experimental: {
@@ -54,7 +49,6 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: false,
       routes: ['/'],
-      ignore: ['/hi'],
     },
   },
 

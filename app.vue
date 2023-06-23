@@ -33,24 +33,15 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
   <div class="h-full w-full font-mono">
     <NuxtLoadingIndicator :height="3" />
     <Header :paths="paths" />
-    <div ref="toTopRef" class="scrool-style h-[calc(100vh-7rem)] overflow-y-auto pb-5">
+    <div ref="toTopRef" class="scroll-style h-[calc(100vh-6rem)] overflow-y-auto pb-5">
       <NuxtLayout>
         <ToTop :top="y" @go-top="y = 0" />
-        <div>
-          <NuxtPage :page-key="$route.fullPath" />
-        </div>
+        <NuxtPage :page-key="$route.fullPath" />
       </NuxtLayout>
     </div>
   </div>
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+
 </style>

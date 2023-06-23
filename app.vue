@@ -10,20 +10,7 @@ useSeoMeta({
   description: '我的生活日记, 博客, 生活, blob daily life',
 })
 
-const paths = reactive([
-  {
-    label: '首页',
-    value: '/home',
-  },
-  {
-    label: '生活',
-    value: '/life',
-  },
-  {
-    label: '博客',
-    value: '/blob',
-  },
-])
+const { paths } = useAppConfig()
 
 const toTopRef = ref<HTMLElement>()
 const { y } = useScroll(toTopRef, { behavior: 'smooth' })

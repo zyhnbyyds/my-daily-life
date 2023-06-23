@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxt/content',
     'nuxt-typed-router',
+    'unplugin-icons/nuxt',
   ],
 
   content: {

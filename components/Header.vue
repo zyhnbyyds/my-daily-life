@@ -1,11 +1,8 @@
 <script lang='ts' setup>
-interface RouteItem {
-  label: string
-  value: string
-}
+import type { TabItem } from './Tab.vue'
 
 interface Props {
-  paths: RouteItem[]
+  paths: TabItem[]
 }
 
 const props = defineProps<Props>()

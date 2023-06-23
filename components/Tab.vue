@@ -2,6 +2,7 @@
 export interface TabItem {
   label: string
   value: string
+  icon: string
   [key: string]: any
 }
 
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits<Emits>()
 const isLoaded = ref(false)
+const { isHeaderTextOrIcon } = useAppConfig()
 
 const actTabVal = computed({
   get() {
@@ -70,7 +72,12 @@ onMounted(() => {
   <div class="shadow-self relative inline-flex gap-2 rounded-6 px-2 py-2 font-bold shadow-md dark:bg-#333">
     <div v-for="item, i in props.tabs" ref="tabsRef" :key="i" class="relative z-10">
       <div class="relative z-10 cursor-pointer rounded-3 px-4 py-1" hover="text-#1ad6ff text-opacity-60" :class="{ 'text-#1ad6ff': actTabVal === item.value }" @click="handleTabChange(item[props.valueFiled], i)">
-        {{ item[props.labelFiled] }}
+        <div v-if="isHeaderTextOrIcon === 'text'">
+          {{ item[props.labelFiled] }}
+        </div>
+        <div v-else-if="isHeaderTextOrIcon === 'icon'">
+          <Icon :name="item.icon" />
+        </div>
       </div>
     </div>
     <slot name="extra" />

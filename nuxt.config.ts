@@ -5,6 +5,8 @@ export default defineNuxtConfig({
     shim: true,
   },
 
+  ssr: false,
+
   extends: [
     '@nuxt-themes/typography',
   ],

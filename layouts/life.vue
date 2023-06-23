@@ -1,7 +1,5 @@
 <script lang='ts' setup>
-const { data: lifeDataList } = await useAsyncData('lifeDataList', () => {
-  return queryContent('life').only(['_path', 'title', 'createTime', 'imgUrl']).find()
-})
+const lifeDataList = await queryContent('life').only(['_path', 'title', 'createTime', 'imgUrl']).find()
 </script>
 
 <template>

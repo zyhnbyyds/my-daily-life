@@ -2,7 +2,9 @@
 </script>
 
 <template>
-  <ContentPageRender />
+  <div>
+    <ContentPageRender />
+  </div>
 </template>
 
 <style scoped></style>

@@ -1,7 +1,6 @@
 <script lang='ts' setup>
 const { path } = useRoute()
-const { data } = await useAsyncData('data', () => queryContent(path).findOne())
-
+const data = await queryContent(path).findOne()
 useSeoMeta({
   title: data.value?.title,
   description: data.value?.desc,
@@ -31,8 +30,8 @@ const nextDataTransformed = computed(() => {
   <div>
     <BackTo :parent-path="path" />
     <div px-3>
-      <ContentRenderer :value="data === null ? {} : data">
-        <ContentRendererMarkdown :value="data === null ? {} : data" />
+      <ContentRenderer :value="data">
+        <ContentRendererMarkdown :value="data" />
         <template #empty>
           <p>No content found.</p>
         </template>

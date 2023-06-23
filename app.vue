@@ -36,7 +36,9 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
     <div ref="toTopRef" class="scrool-style h-[calc(100vh-7rem)] overflow-y-auto pb-5">
       <NuxtLayout>
         <ToTop :top="y" @go-top="y = 0" />
-        <NuxtPage :page-key="$route.fullPath" />
+        <div>
+          <NuxtPage :page-key="$route.fullPath" />
+        </div>
       </NuxtLayout>
     </div>
   </div>

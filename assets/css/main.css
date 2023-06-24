@@ -19,7 +19,7 @@ tbody td {
 
 .scroll-style::-webkit-scrollbar, pre::-webkit-scrollbar {
   display: block;
-  background: rgba(0,0,0,0.1);
+  background: none;
   height: 8px;
   width: 8px;
   border-radius: 4px;
@@ -34,13 +34,13 @@ tbody td {
 }
 
 html.dark .scroll-style::-webkit-scrollbar, html.dark pre::-webkit-scrollbar {
-  background: #777;
+  background: none;
 }
 
 html.dark .scroll-style::-webkit-scrollbar-thumb, html.dark pre::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.5);
 }
 
 html.dark .scroll-style::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
 }

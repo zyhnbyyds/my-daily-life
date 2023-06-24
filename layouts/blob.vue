@@ -17,8 +17,10 @@ function mouseover(_ele: MouseEvent, index: number) {
   if (actDiv.value && childrenNodes.value) {
     actDiv.value.style.top = `${(childrenNodes.value[index] as any).offsetTop}px`
     setTimeout(() => {
-      actDiv.value!.style.transitionDuration = '150ms'
-      actDiv.value!.style.opacity = '1'
+      if (actDiv.value) {
+        actDiv.value!.style.transitionDuration = '150ms'
+        actDiv.value!.style.opacity = '1'
+      }
     }, 100)
   }
 }

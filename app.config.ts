@@ -5,7 +5,7 @@ export default defineAppConfig({
     },
   },
   /** 页面滚动多少时展示返回顶部 */
-  pageScroolTop: 600,
+  pageScroolTop: 50,
   /** 跳转的地址链接 */
   paths: [
     {
@@ -27,5 +27,5 @@ export default defineAppConfig({
   /** 头部跳转展示文字还是图标
    * @type 'text' | 'icon'
    */
-  isHeaderTextOrIcon: 'icon',
+  isHeaderTextOrIcon: 'text',
 })

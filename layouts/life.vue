@@ -68,7 +68,8 @@ const actShowList = computed(() => {
         <!-- {{ item }} -->
         <div v-for="item2, idx2 in item" :key="idx2" class="mb-4">
           <NuxtLink :to="(item2 ?? {})._path || '/'">
-            <NuxtImg format="webp" hover="scale-102" class="grid-rows-2 rounded-md shadow-md transition-transform" :src="(item2 ?? {}).imgUrl || '/preview.jpg'" />
+            <img hover="scale-102" class="grid-rows-2 rounded-md shadow-md transition-transform" :src="(item2 ?? {}).imgUrl || '/preview.jpg'">
+            <!-- <NuxtImg format="webp" :src="(item2 ?? {}).imgUrl || '/preview.jpg'" /> -->
           </NuxtLink>
         </div>
       </div>

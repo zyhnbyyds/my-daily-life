@@ -18,12 +18,12 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
 
 <template>
   <div class="h-full w-full font-mono">
-    <NuxtLoadingIndicator :height="3" />
     <Header :paths="paths" />
     <div ref="toTopRef" class="scroll-style h-[calc(100vh-5rem)] overflow-y-auto">
+      <ToTop :top="y" @go-top="y = 0" />
       <div class="pb-6">
         <NuxtLayout>
-          <ToTop :top="y" @go-top="y = 0" />
+          <NuxtLoadingIndicator :height="3" />
           <NuxtPage :page-key="$route.fullPath" />
         </NuxtLayout>
       </div>

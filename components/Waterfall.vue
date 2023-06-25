@@ -1,16 +1,39 @@
 <script lang='ts' setup>
-interface LifeItem {
+export interface Props {
+  emptyImgUrl?: string
+  data: WaterflowItem[]
+  /** 没有_path地址的时候的重定向位置 */
+  pathRedirect?: string
+}
+
+export interface WaterflowItem {
   title: string
   imgUrl: string
   _path: string
   createTime?: string
 }
 
-const { data: lifeDataList } = await useAsyncData('lifeDataList', () => queryContent<LifeItem>('life').only(['_path', 'title', 'createTime', 'imgUrl']).find(),
-)
+interface WaterflowItemWithHW extends WaterflowItem {
+  width: number
+  height: number
+}
+const props = withDefaults(defineProps<Props>(), {
+  emptyImgUrl: '/preview.jpg',
+  pathRedirect: '/',
+})
+
+const { getMeta } = useImage()
+
+const res = await Promise.all(props.data.map(async (item) => {
+  const res = await getMeta(item.imgUrl)
+  return { ...item, ...res } as WaterflowItemWithHW
+}))
+
+const lifeDataList = ref(res)
 
 const { width } = useWindowSize()
 const activeCol = ref<number>(4)
+
 judgeCols(width.value)
 
 watch(() => width.value, (newVal) => {
@@ -28,13 +51,12 @@ function judgeCols(windowWidth: number) {
     activeCol.value = 2
 }
 
-// TODO => fix show bug
 const actShowList = computed(() => {
   if (!lifeDataList.value || lifeDataList.value.length === 0)
     return [[]]
   const dataLength = lifeDataList.value.length
 
-  const arr: LifeItem[][] = []
+  const arr: WaterflowItem[][] = []
   for (let index = 0; index < activeCol.value; index++)
     arr.push([])
 
@@ -42,7 +64,7 @@ const actShowList = computed(() => {
   for (let index = 0; index < num; index++) {
     const arr2 = lifeDataList.value.slice(index * activeCol.value, (index + 1) * activeCol.value)
     arr.map((item, index) => {
-      item.push(arr2[index] as unknown as LifeItem)
+      item.push(arr2[index])
       return item
     })
   }
@@ -52,7 +74,7 @@ const actShowList = computed(() => {
     for (let index = 0; index < num2; index++) {
       arr.map((item, idx) => {
         if (idx === index)
-          item.push(toPushArr[index] as unknown as LifeItem)
+          item.push(toPushArr[index])
         return item
       })
     }
@@ -62,19 +84,16 @@ const actShowList = computed(() => {
 </script>
 
 <template>
-  <main class="m-auto mt-2 lg:w-10/12 sm:w-full sm:px-4">
-    <div class="w-full px-3 lg:grid-cols-4 md:grid-cols-3" sm="grid-cols-2" grid="~ gap-4 cols-2">
-      <div v-for="item, i in actShowList" :key="i">
-        <!-- {{ item }} -->
-        <div v-for="item2, idx2 in item" :key="idx2" class="mb-4">
-          <NuxtLink :to="(item2 ?? {})._path || '/'">
-            <img hover="scale-102" class="grid-rows-2 rounded-md shadow-md transition-transform" :src="(item2 ?? {}).imgUrl || '/preview.jpg'">
-            <!-- <NuxtImg format="webp" :src="(item2 ?? {}).imgUrl || '/preview.jpg'" /> -->
-          </NuxtLink>
-        </div>
+  <div class="w-full px-3 lg:grid-cols-4 md:grid-cols-3" sm="grid-cols-2" grid="~ gap-4 cols-2">
+    <div v-for="item, i in actShowList" :key="i">
+      <div v-for="item2, idx2 in item" :key="idx2" class="mb-4">
+        <img
+          hover="scale-102" class="grid-rows-2 rounded-md shadow-md transition-transform"
+          :src="(item2 ?? {}).imgUrl || props.emptyImgUrl"
+        >
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <style scoped></style>

@@ -26,6 +26,7 @@
     "@vueuse/nuxt": "^10.2.0",
     "consola": "^3.1.0",
     "eslint": "^8.43.0",
+    "image-size": "^1.0.2",
     "nuxt": "^3.6.0",
     "nuxt-typed-router": "^3.2.3",
     "typescript": "^5.1.3",

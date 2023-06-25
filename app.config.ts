@@ -14,14 +14,14 @@ export default defineAppConfig({
       value: '/home',
     },
     {
-      label: 'Life',
-      icon: 'solar:backpack-outline',
-      value: '/life',
-    },
-    {
       label: 'Blob',
       icon: 'solar:ruler-cross-pen-broken',
       value: '/blob',
+    },
+    {
+      label: 'Demo',
+      icon: 'solar:backpack-outline',
+      value: '/demo',
     },
   ],
   /** 头部跳转展示文字还是图标

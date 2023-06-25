@@ -13,10 +13,6 @@ html.dark {
   color: #ffffee;
 }
 
-tbody td {
-  text-align: center;
-}
-
 .scroll-style::-webkit-scrollbar, pre::-webkit-scrollbar {
   display: block;
   background: none;

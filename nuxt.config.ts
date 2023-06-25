@@ -5,8 +5,6 @@ export default defineNuxtConfig({
     shim: true,
   },
 
-  ssr: false,
-
   extends: [
     '@nuxt-themes/typography',
   ],
@@ -16,8 +14,10 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@nuxtjs/color-mode',
     '@nuxt/content',
+    '@nuxt/devtools',
     'nuxt-typed-router',
     'unplugin-icons/nuxt',
+    '@nuxt/image',
   ],
 
   content: {
@@ -49,10 +49,6 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-    },
   },
 
   app: {
@@ -76,4 +72,8 @@ export default defineNuxtConfig({
   css: [
     '@/assets/css/main.css',
   ],
+
+  image: {
+    inject: true,
+  },
 })

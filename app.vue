@@ -23,12 +23,6 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
   <div class="h-full w-full font-mono">
     <Header :paths="paths" />
     <div ref="toTopRef" class="scroll-style h-[calc(100vh-5rem)] overflow-y-auto">
-      <button class="mr-10" @click="nprogress.start()">
-        start
-      </button>
-      <button @click="nprogress.done()">
-        end
-      </button>
       <ToTop :top="y" @go-top="y = 0" />
       <div class="pb-6">
         <NuxtLayout>

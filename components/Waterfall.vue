@@ -1,4 +1,6 @@
 <script lang='ts' setup>
+import { arrFindNum } from '~/utils/common'
+
 export interface Props {
   emptyImgUrl?: string
   data: WaterflowItem[]
@@ -14,7 +16,7 @@ export interface WaterflowItem {
 }
 
 interface WaterflowItemWithHW extends WaterflowItem {
-  width: number
+  reverseRatio: number
   height: number
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -25,8 +27,10 @@ const props = withDefaults(defineProps<Props>(), {
 const { getMeta } = useImage()
 
 const res = await Promise.all(props.data.map(async (item) => {
-  const res = await getMeta(item.imgUrl)
-  return { ...item, ...res } as WaterflowItemWithHW
+  const { height, width } = await getMeta(item.imgUrl)
+  const reverseRatio = (height / width) * 1000
+
+  return { ...item, reverseRatio, height, width } as WaterflowItemWithHW
 }))
 
 const lifeDataList = ref(res)
@@ -57,27 +61,30 @@ const actShowList = computed(() => {
   const dataLength = lifeDataList.value.length
 
   const arr: WaterflowItem[][] = []
-  for (let index = 0; index < activeCol.value; index++)
+  const remHeight: number[] = []
+  for (let index = 0; index < activeCol.value; index++) {
+    remHeight.push(0)
     arr.push([])
-
-  const num = Math.floor(dataLength / activeCol.value)
-  for (let index = 0; index < num; index++) {
-    const arr2 = lifeDataList.value.slice(index * activeCol.value, (index + 1) * activeCol.value)
-    arr.map((item, index) => {
-      item.push(arr2[index])
-      return item
-    })
   }
-  if (dataLength % activeCol.value !== 0) {
-    const num2 = dataLength % activeCol.value
-    const toPushArr = lifeDataList.value.slice(num * activeCol.value, dataLength)
-    for (let index = 0; index < num2; index++) {
-      arr.map((item, idx) => {
-        if (idx === index)
-          item.push(toPushArr[index])
-        return item
-      })
-    }
+
+  if (dataLength < activeCol.value) {
+    for (let index = 0; index < dataLength; index++)
+      arr[index].push(lifeDataList.value[index])
+  }
+  else {
+    lifeDataList.value.forEach((item, index) => {
+      if (index <= activeCol.value - 1) {
+        arr[index].push(item)
+        remHeight[index] += item.reverseRatio
+      }
+      else {
+        const idx = arrFindNum(remHeight)
+        if (arr[idx]) {
+          arr[idx].push(item)
+          remHeight[idx] += item.reverseRatio
+        }
+      }
+    })
   }
   return arr
 })

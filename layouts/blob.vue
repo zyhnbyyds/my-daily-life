@@ -34,15 +34,12 @@ function mouseleave() {
     }
   }, 100)
 }
-
-onMounted(() => {
-})
 </script>
 
 <template>
   <main class="w-full flex justify-center">
     <div ref="listRef" class="relative z-2 max-w-3xl w-full flex flex-col" @mouseleave="mouseleave">
-      <div v-for="item, i in blobDataList" :key="i" class="relative z-10 transition-transform duration-300" hover="text-#333 dark:text-#e5e5e5" @mouseover="mouseover($event, i)">
+      <div v-for="item, i in blobDataList" :key="i" class="relative z-10 transition-transform duration-300" hover="text-#333 dark:text-#e5e5e5" active="scale-99" @mouseover="mouseover($event, i)">
         <NuxtLink class="leading-none" :to="item._path ? item._path : '/'">
           <span class="flex items-center px-3 py-3">
             <span>{{ item.title }}</span>

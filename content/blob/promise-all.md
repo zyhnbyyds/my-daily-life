@@ -1,5 +1,5 @@
 ---
-title: '通过promise.all中使用map实现'
+title: '通过promise.all中使用map实现同步循环执行多个请求(promise)'
 ---
 
 ```typescript

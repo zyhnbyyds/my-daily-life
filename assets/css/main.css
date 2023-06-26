@@ -40,3 +40,7 @@ html.dark .scroll-style::-webkit-scrollbar-thumb, html.dark pre::-webkit-scrollb
 html.dark .scroll-style::-webkit-scrollbar-thumb:hover {
   background: rgba(0,0,0,0.6);
 }
+
+#nprogress .bar {
+  height: 4px !important;
+}

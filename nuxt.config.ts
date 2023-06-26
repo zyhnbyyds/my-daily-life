@@ -1,6 +1,10 @@
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
+  vue: {
+    defineModel: true,
+  },
+
   typescript: {
     shim: true,
   },
@@ -71,6 +75,7 @@ export default defineNuxtConfig({
 
   css: [
     '@/assets/css/main.css',
+    'nprogress/nprogress.css',
   ],
 
   image: {

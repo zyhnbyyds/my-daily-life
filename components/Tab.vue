@@ -76,7 +76,7 @@ onMounted(() => {
           {{ item[props.labelFiled] }}
         </div>
         <div v-else-if="isHeaderTextOrIcon === 'icon'">
-          <Icon :name="item.icon" class="text-2xl" />
+          <Icon :name="item.icon" />
         </div>
       </div>
     </div>

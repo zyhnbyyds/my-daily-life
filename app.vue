@@ -2,8 +2,6 @@
 import nprogress from 'nprogress'
 import { appName } from '~/constants'
 
-nprogress.configure({ showSpinner: false })
-
 useHead({
   title: appName,
 })
@@ -17,6 +15,17 @@ const { paths } = useAppConfig()
 
 const toTopRef = ref<HTMLElement>()
 const { y } = useScroll(toTopRef, { behavior: 'smooth' })
+const nuxtApp = useNuxtApp()
+
+nprogress.configure({ showSpinner: false })
+
+nuxtApp.hook('page:start', () => {
+  nprogress.start()
+})
+
+nuxtApp.hook('page:finish', () => {
+  nprogress.done()
+})
 </script>
 
 <template>
@@ -26,7 +35,6 @@ const { y } = useScroll(toTopRef, { behavior: 'smooth' })
       <ToTop :top="y" @go-top="y = 0" />
       <div class="pb-6">
         <NuxtLayout>
-          <NuxtLoadingIndicator :height="10" />
           <NuxtPage :page-key="$route.fullPath" />
         </NuxtLayout>
       </div>

@@ -22,4 +22,6 @@ const activeIndex = ref<string>(handlePathGetFirst(path))
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

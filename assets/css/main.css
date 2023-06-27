@@ -42,5 +42,5 @@ html.dark .scroll-style::-webkit-scrollbar-thumb:hover {
 }
 
 #nprogress .bar {
-  height: 4px !important;
+  height: 2px !important;
 }

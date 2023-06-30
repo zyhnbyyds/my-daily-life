@@ -2,27 +2,17 @@
 const demos = reactive([
   {
     name: '瀑布流',
-    createTime: '2023-06-24',
-    path: '/demo/WaterFall',
+    path: '/demo/Waterfall',
     previewImg: '/my.jpg',
   },
   {
     name: '绘制元素大小',
-    createTime: '2023-06-27',
     path: '/demo/ResizeElement',
     previewImg: '/my.jpg',
   },
   {
-    name: '瀑布流',
-    createTime: '2023-06-24',
-    path: '/demo/WaterFall',
-    previewImg: '/my.jpg',
-  },
-  {
-    name: '瀑布流',
-    createTime: '2023-06-24',
-    path: '/demo/WaterFall',
-    previewImg: '/my.jpg',
+    name: '带有动画效果的按钮集合',
+    path: '/demo/ButtonListAni',
   },
 ])
 </script>
@@ -39,4 +29,5 @@ const demos = reactive([
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

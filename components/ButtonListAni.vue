@@ -28,7 +28,7 @@ const value = defineModel<string | number>('value', { required: true })
       <div v-for="item, i in props.list" :key="i" class="@hover:#333 flex-col-center" @click="value = item.value">
         <div
           :style="{ width: item.value === value ? `${item.label.length * 16 + 100}px` : '40px' }"
-          class="trans-all-300-ease h-40px flex-center cursor-pointer border border-lightBlue-200 rounded-full py2 transition-width"
+          class="h-40px flex-center cursor-pointer border border-lightBlue-200 rounded-full py2 trans-all-300-ease"
         >
           <Icon :name="item.icon" size="22" />
           <div v-show="item.value === value" class="ml-2 truncate">

@@ -73,7 +73,6 @@ export default defineNuxtConfig({
 
   css: [
     '@/assets/css/main.css',
-    '@/assets/css/md.css',
     'nprogress/nprogress.css',
   ],
 

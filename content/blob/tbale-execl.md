@@ -1,6 +1,11 @@
 ---
-title: 'table表单的数据导出(execl)'
+desc: 
+title: table表格数据导出excel数据
+createTime: 2023-06-17 21:17:21
+updateTime: 2023-06-29 22:11:31
 ---
+
+## table表格数据导出excel数据
 
 ### 1. 下载xlsx包文件
 
@@ -47,6 +52,3 @@ utils.book_append_sheet(wb, ws, 'Data');
 // 写入数据到xlsx并且导出文件
 writeFileXLSX(wb, `${exportDevice.value}.xlsx`)
 ```
-
-演示gif![](D:\download\edge\2022-12-27 13-53-55.gif)
-

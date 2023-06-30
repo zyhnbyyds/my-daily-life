@@ -1,12 +1,15 @@
 ---
-title: '表单相关api的统一hooks封装(表单数据的增删改查)'
+desc: 
+title: usePageTable的简单封装
+createTime: 2023-06-17 21:17:21
+updateTime: 2023-06-29 22:10:47
 ---
 
-## 1. 需求分析
+## usePageTable的简单封装
 
 ​		在一个函数中封装多个api集合(基本的增删改查)的hook函数，包含表单的加载状态，modal弹出框的状态，表单数据源的封装，以及分页切换的数据重新查询。
 
-## 2. 实现方法
+###### 2. 实现方法
 
 (1) 定义串口参数接口
 
@@ -91,9 +94,7 @@ return {
   };
 ```
 
-
-
-## 3. 界面使用(demo)
+###### 3. 界面使用(demo)
 
 ```typescript [code]
 const { loading, getListFn, tableOrigin, addListFn, editListFn, deleteListFn, modalHide, modalShow, modalVisile } =
@@ -106,11 +107,11 @@ const { loading, getListFn, tableOrigin, addListFn, editListFn, deleteListFn, mo
 
 ```
 
-## 3. 总结
+###### 3. 总结
 
-​		此处封装的还是有些许简陋，后面还会对查询参数做一些调整，以及细节的补充。其实表单封装更多还是，针对某一些耦合度较高的增删改查表单，减少代码量和代码冗余而做的努力。如果说是比较复杂的表单，其实做统一封装的难度较大。可以做单独特殊的处理。 
+​		此处封装的还是有些许简陋，后面还会对查询参数做一些调整，以及细节的补充。其实表单封装更多还是，针对某一些耦合度较高的增删改查表单，减少代码量和代码冗余而做的努力。如果说是比较复杂的表单，其实做统一封装的难度较大。可以做单独特殊的处理。
 
-## 4.代码(usePageTable.ts)
+###### 4.代码(usePageTable.ts)
 
 ```typescript [usePageTable.ts]
 import { reactive, ref } from 'vue';
@@ -211,6 +212,3 @@ export function usePageTable<T>(params: PageTableParams<T>) {
 }
 
 ```
-
-
-

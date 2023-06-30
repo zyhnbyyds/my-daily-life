@@ -43,8 +43,6 @@ export default defineNuxtConfig({
 
   colorMode: {
     classSuffix: '',
-    preference: 'system',
-    fallback: 'light',
   },
 
   nitro: {
@@ -75,6 +73,7 @@ export default defineNuxtConfig({
 
   css: [
     '@/assets/css/main.css',
+    '@/assets/css/md.css',
     'nprogress/nprogress.css',
   ],
 
@@ -82,4 +81,9 @@ export default defineNuxtConfig({
     inject: true,
     provider: 'netlify',
   },
+
+  watch: [
+    'tokens.config.ts',
+    'app.config.ts',
+  ],
 })

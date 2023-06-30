@@ -6,6 +6,8 @@ useHead({
   title: appName,
 })
 
+const route = useRoute()
+
 useSeoMeta({
   title: '我的生活日记',
   description: '我的生活日记, 博客, 生活, blob daily life',
@@ -26,6 +28,14 @@ nuxtApp.hook('page:start', () => {
 nuxtApp.hook('page:finish', () => {
   nprogress.done()
 })
+
+watch(() => route.path, (_path) => {
+  if (y.value !== 0) {
+    setTimeout(() => {
+      y.value = 0
+    }, 200)
+  }
+})
 </script>
 
 <template>
@@ -43,5 +53,12 @@ nuxtApp.hook('page:finish', () => {
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1s;
+}
 
+.fade-leave-to {
+  transform: translateX(-10px);
+}
 </style>

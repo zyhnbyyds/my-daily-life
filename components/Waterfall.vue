@@ -17,7 +17,6 @@ export interface WaterflowItem {
 
 interface WaterflowItemWithHW extends WaterflowItem {
   reverseRatio: number
-  height: number
 }
 const props = withDefaults(defineProps<Props>(), {
   emptyImgUrl: '/preview.jpg',
@@ -30,7 +29,7 @@ const res = await Promise.all(props.data.map(async (item) => {
   const { height, width } = await getMeta(item.imgUrl)
   const reverseRatio = (height / width) * 1000
 
-  return { ...item, reverseRatio, height, width } as WaterflowItemWithHW
+  return { ...item, reverseRatio } as WaterflowItemWithHW
 }))
 
 const lifeDataList = ref(res)
@@ -94,10 +93,12 @@ const actShowList = computed(() => {
   <div class="w-full px-3 lg:grid-cols-4 md:grid-cols-3" sm="grid-cols-2" grid="~ gap-4 cols-2">
     <div v-for="item, i in actShowList" :key="i">
       <div v-for="item2, idx2 in item" :key="idx2" class="mb-4">
-        <img
+        <NuxtImg
+          quality="80"
+          format="webp"
           hover="scale-102" class="grid-rows-2 rounded-md shadow-md transition-transform"
           :src="(item2 ?? {}).imgUrl || props.emptyImgUrl"
-        >
+        />
       </div>
     </div>
   </div>

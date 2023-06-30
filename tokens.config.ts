@@ -1,19 +1,16 @@
 import { defineTheme } from 'pinceau'
 
 export default defineTheme({
-  typography: {
-    letterSpacing: {
-      tight: '-0.035em',
-      wide: '0.035em',
-    },
-    fontSize: '12px',
-  },
   prose: {
     h2: {
-      fontSize: '24px',
+      fontSize: '{typography.fontSize.2xl}',
+      fontWeight: '500',
     },
-    th: {
-      textAlign: 'center',
+    h3: {
+      fontSize: '20px',
+    },
+    p: {
+      fontSize: '15px',
     },
   },
 })

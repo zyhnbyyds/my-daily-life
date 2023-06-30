@@ -11,7 +11,7 @@ export default defineAppConfig({
     {
       label: 'Home',
       icon: 'solar:home-angle-broken',
-      value: '/home',
+      value: '/',
     },
     {
       label: 'Blob',
@@ -27,5 +27,5 @@ export default defineAppConfig({
   /** 头部跳转展示文字还是图标
    * @type 'text' | 'icon'
    */
-  isHeaderTextOrIcon: 'icon',
+  isHeaderTextOrIcon: 'text',
 })

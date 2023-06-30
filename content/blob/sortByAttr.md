@@ -1,6 +1,11 @@
 ---
-title: 'js根据对象某一属性排序的简单封装'
+desc: 
+title: 根据对象的某一属性值来进行数组的排序
+createTime: 2023-06-17 21:17:21
+updateTime: 2023-06-29 22:10:02
 ---
+
+## 根据对象的某一属性值来进行数组的排序
 
 使用typescript, 接收一个泛型参数T, 暂时只支持数字属性的排序。
 
@@ -20,4 +25,3 @@ export function sortByNumber<T>(arr: T[], target: keyof T) {
 }
 
 ```
-

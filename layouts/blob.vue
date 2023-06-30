@@ -3,8 +3,13 @@ const listRef = ref<HTMLElement>()
 const actDiv = ref<HTMLDivElement>()
 
 const blobDataList = ref<any[]>([])
-queryContent('blob').only(['_path', 'title', 'createTime']).find().then((res) => {
-  blobDataList.value = res
+queryContent('blob').only(['_path', 'title', 'createTime']).sort({ createTime: -1 }).find().then((res) => {
+  blobDataList.value = res.map((item) => {
+    return {
+      ...item,
+      createTime: useDateFormat(item.createTime, 'YYYY-MM-DD'),
+    }
+  })
 })
 
 const childrenNodes = computed(() => {
@@ -44,7 +49,7 @@ function mouseleave() {
           <span class="flex items-center px-3 py-3">
             <span>{{ item.title }}</span>
             <span v-if="item.createTime" class="pl-2 text-sm opacity-40">
-              <span class="i-carbon:time inline-block align-middle" />
+              <span class="i-carbon:time mr-1 inline-block align-middle" />
               <span class="align-middle dark:text-[#e5e5e5]">
                 {{ item.createTime }}
               </span>

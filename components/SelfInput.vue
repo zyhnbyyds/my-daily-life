@@ -1,0 +1,58 @@
+<script lang='ts' setup>
+interface ResType {
+  title: string
+  _path: string
+}
+
+// const props = defineProps<{ visible: boolean }>()
+// const { visible } = toRefs(props)
+const value = defineModel<string>('value', { required: true })
+
+const [loading, toggle] = useToggle()
+const queryList = ref<ResType[]>([])
+const iptRef = ref<HTMLInputElement | null>(null)
+
+const debouncedFn = useDebounceFn(() => {
+  if (toValue(value) !== '')
+    handleGetNearArtical(toValue(value))
+
+  else
+    queryList.value = []
+}, 1000)
+
+watch(() => toValue(value), (_val) => {
+  debouncedFn()
+})
+
+async function handleGetNearArtical(target: string) {
+  toggle(true)
+  const res = await queryContent('blob')
+    .where({ title: { $regex: target } })
+    .only(['_path', 'title', 'createTime'])
+    .find()
+  queryList.value = res as ResType[]
+  toggle(false)
+}
+</script>
+
+<template>
+  <div>
+    <div class="flex-col-center border-1 rounded-sm pl-2 dark:border-#777">
+      <Icon class="text-coolgray" size="24" :name="loading ? 'svg-spinners:tadpole' : 'solar:magnifer-linear'" />
+      <input ref="iptRef" v-model="value" class="w-full rounded-lg bg-transparent px-3 py-3 text-16px font-500 font-mono text-inherit outline-none" type="text">
+    </div>
+    <div class="min-h-50">
+      <div v-if="loading" class="hw-full min-h-50 flex-center">
+        <Icon size="25" name="svg-spinners:bars-scale" />
+      </div>
+      <div v-else class="hw-full pt-2">
+        <div v-if="!queryList || queryList.length === 0" class="hw-full min-h-50 flex-center">
+          no-data
+        </div>
+        <ActiveBgList :list="queryList" label-field="title" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>

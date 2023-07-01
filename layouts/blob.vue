@@ -1,6 +1,4 @@
 <script lang='ts' setup>
-const listRef = ref<HTMLElement>()
-
 const blobDataList = ref<any[]>([])
 queryContent('blob').only(['_path', 'title', 'createTime']).sort({ createTime: -1 }).find().then((res) => {
   blobDataList.value = res.map((item) => {
@@ -46,6 +44,21 @@ const selectCards = [
 
 const selectedVals = ref<(string | number)[]>([selectCards[0].value])
 const activeBtn = ref(buttons[0].value)
+const modalVisible = ref(false)
+
+watch(() => activeBtn.value, (val) => {
+  if (val === 'search')
+    modalVisible.value = true
+})
+
+onKeyStroke('Escape', () => {
+  modalVisible.value = false
+})
+
+onKeyStroke(['Ctrl', 'k'], (e) => {
+  e.preventDefault()
+  modalVisible.value = true
+})
 </script>
 
 <template>
@@ -56,6 +69,7 @@ const activeBtn = ref(buttons[0].value)
         <MutiSelectCard :list="selectCards" @change="(val: (string | number)[]) => selectedVals = val" />
       </template>
     </ButtonListAni>
+    <SearchMask v-model:model-visible="modalVisible" />
   </main>
 </template>
 

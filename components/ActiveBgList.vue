@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
   valueField: 'value',
 })
 
-const { list, labelField, valueField } = toRefs(props)
+const { list, labelField } = toRefs(props)
 const listRef = ref<HTMLElement>()
 const actDiv = ref<HTMLDivElement>()
 

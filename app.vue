@@ -43,7 +43,7 @@ watch(() => route.path, (_path) => {
     <Header :paths="paths" />
     <div ref="toTopRef" class="scroll-style h-[calc(100vh-5rem)] overflow-y-auto">
       <ToTop :top="y" @go-top="y = 0" />
-      <div class="pb-6">
+      <div class="h-full pb-6">
         <NuxtLayout>
           <NuxtPage :page-key="$route.fullPath" />
         </NuxtLayout>

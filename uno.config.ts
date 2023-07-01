@@ -17,6 +17,11 @@ export default defineConfig({
     ['flex-col-center', 'flex items-center'],
     ['flex-row-center', 'flex justify-center'],
     ['trans-all-300-ease', 'transition-all duration-300 transition-ease'],
+    ['absolute-x-center', 'absolute left-1/2 -translate-x-1/2'],
+    ['absolute-y-center', 'absolute top-1/2 -translate-y-1/2'],
+    ['absolute-center', 'absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2'],
+    ['hw-full', 'h-full w-full'],
+    ['trans-300', 'transition-all duration-300'],
   ],
   presets: [
     presetUno(),

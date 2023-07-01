@@ -1,7 +1,5 @@
 <script lang='ts' setup>
-import type { BtnListItem } from '~/components/ButtonListAni.vue'
-
-const list: BtnListItem[] = [
+const list: Components.BtnListItem[] = [
   {
     label: '代码',
     value: 'code',

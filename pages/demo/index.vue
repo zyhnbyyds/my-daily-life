@@ -6,22 +6,22 @@ const demos = reactive([
     previewImg: '/my.jpg',
   },
   {
-    name: '绘制元素大小',
+    name: '绘制元素',
     path: '/demo/ResizeElement',
     previewImg: '/my.jpg',
   },
   {
-    name: '带有动画效果的按钮集合',
+    name: '动画按钮',
     path: '/demo/ButtonListAni',
   },
 ])
 </script>
 
 <template>
-  <div grid="~ cols-4" class="gap-10">
+  <div grid="~ cols-10 rows-7" class="hw-full gap-5">
     <div v-for="item in demos" :key="item.path">
       <NuxtLink :to="item.path">
-        <div class="h-70 w-full flex-center bg-light-blue-200 text-#333">
+        <div class="trans-300 h-full w-full flex-center rounded-md bg-light-blue-100 text-14px text-#333 hover:scale-105">
           {{ item.name }}
         </div>
       </NuxtLink>

@@ -53,10 +53,11 @@ function handleClickFn(targetItem: MutiSelectCardItem) {
 
 <!-- 多选卡片组件 -->
 <template>
-  <div class="w-full gap-2 overflow-hidden">
+  <div class="w-full flex flex-wrap gap-2 p-2">
     <div
       v-for="item, i in list"
-      :key="i" class="cursor-pointer rounded-20px px-3 py-2"
+      :key="i"
+      class="cursor-pointer rounded-20px bg-op-20 px-3 py-2 hover:ring-2"
       :style="judgeIsActive(item.value)"
       @click="handleClickFn(item)"
     >

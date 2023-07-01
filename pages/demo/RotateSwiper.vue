@@ -17,9 +17,9 @@ function handleSlideChange(e: any) {
         'rotate-z-0': curSlide === 1,
         'rotate-z-20': curSlide === 2,
       }"
-      class="absolute-x-center z-100 h-5xl w-5xl rotate-x-64 border-3px border-white rounded-full text-white trans-all-300-ease -top-43em"
+      class="z-100 h-5xl w-5xl rotate-x-64 border-3px border-white rounded-full text-white trans-all-300-ease absolute-x-center -top-43em"
     >
-      <div class="absolute-x-center rotate-x-80 rotate-y-10 -bottom-10" after="h-2 w-2">
+      <div class="rotate-x-80 rotate-y-10 absolute-x-center -bottom-10" after="h-2 w-2">
         白银
       </div>
       <div class="absolute bottom-0 left-34% rotate-x-100 rotate-z-20">

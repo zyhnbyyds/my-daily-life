@@ -22,6 +22,7 @@ export default defineConfig({
     ['absolute-center', 'absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2'],
     ['hw-full', 'h-full w-full'],
     ['trans-300', 'transition-all duration-300'],
+    ['trans-act-scale', 'transition-transform active:scale-99'],
   ],
   presets: [
     presetUno(),

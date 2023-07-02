@@ -2,6 +2,7 @@
 interface ResType {
   title: string
   _path: string
+  createTime: string
 }
 
 const value = defineModel<string>('value', { required: true })
@@ -27,8 +28,14 @@ async function handleGetNearArtical(target: string) {
   const res = await queryContent('blob')
     .where({ title: { $regex: target } })
     .only(['_path', 'title', 'createTime'])
-    .find()
-  queryList.value = res as ResType[]
+    .find() as ResType[]
+
+  queryList.value = res.map((item) => {
+    return {
+      ...item,
+      createTime: useDateFormat(item.createTime, 'YYYY-MM-DD') as unknown as string,
+    }
+  })
   toggle(false)
 }
 
@@ -55,7 +62,7 @@ onMounted(() => {
         <div v-if="!queryList || queryList.length === 0" class="hw-full min-h-50 flex-center">
           no-data
         </div>
-        <ActiveBgList :list="queryList" label-field="title" />
+        <ActiveBgList class="font-normal" :list="queryList" label-field="title" />
       </div>
     </div>
   </div>

@@ -51,6 +51,9 @@ export default defineNuxtConfig({
         target: 'esnext',
       },
     },
+    prerender: {
+      routes: ['/blob', '/demo', '/'],
+    },
   },
 
   app: {

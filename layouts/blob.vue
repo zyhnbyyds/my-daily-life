@@ -42,7 +42,7 @@ const selectCards = [
   },
 ]
 
-const selectedVals = ref<(string | number)[]>([selectCards[0].value])
+const selectedVals = ref<(string)[]>([selectCards[0].value])
 const activeBtn = ref(buttons[0].value)
 const modalVisible = ref(false)
 
@@ -66,7 +66,7 @@ onKeyStroke(['Ctrl', 'k'], (e) => {
     <ActiveBgList :list="blobDataList" label-field="title" />
     <ButtonListAni v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray">
       <template #popup>
-        <MutiSelectCard :list="selectCards" @change="(val: (string | number)[]) => selectedVals = val" />
+        <MutiSelectCard :list="selectCards" @change="(val: string[]) => selectedVals = val" />
       </template>
     </ButtonListAni>
     <SearchMask v-model:model-visible="modalVisible" />

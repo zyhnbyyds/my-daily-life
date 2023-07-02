@@ -1,7 +1,7 @@
 <script lang='ts' setup>
 interface MutiSelectCardItem {
   label: string
-  value: string | number
+  value: string
   [key: string]: any
 }
 
@@ -15,10 +15,8 @@ interface Props {
   inactiveBgColor?: string
 }
 
-type ValueType = (string | number)[]
-
 interface Emits {
-  (event: 'change', e: ValueType): void
+  (event: 'change', e: string[]): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -30,9 +28,9 @@ const props = withDefaults(defineProps<Props>(), {
 const emits = defineEmits<Emits>()
 
 const { inactiveBgColor, activeBgColor, activeColor, inactiveColor, list } = toRefs(props)
-const vals = reactive<ValueType>([])
+const vals = reactive<string[]>([])
 
-function judgeIsActive(val: string | number) {
+function judgeIsActive(val: string) {
   const isInclude = vals.includes(val)
   return {
     background: isInclude ? activeBgColor.value : inactiveBgColor.value,

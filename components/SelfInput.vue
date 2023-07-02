@@ -4,8 +4,6 @@ interface ResType {
   _path: string
 }
 
-// const props = defineProps<{ visible: boolean }>()
-// const { visible } = toRefs(props)
 const value = defineModel<string>('value', { required: true })
 
 const [loading, toggle] = useToggle()
@@ -33,13 +31,21 @@ async function handleGetNearArtical(target: string) {
   queryList.value = res as ResType[]
   toggle(false)
 }
+
+onMounted(() => {
+  iptRef.value?.focus()
+})
 </script>
 
 <template>
   <div>
     <div class="flex-col-center border-1 rounded-sm pl-2 dark:border-#777">
       <Icon class="text-coolgray" size="24" :name="loading ? 'svg-spinners:tadpole' : 'solar:magnifer-linear'" />
-      <input ref="iptRef" v-model="value" class="w-full rounded-lg bg-transparent px-3 py-3 text-16px font-500 font-mono text-inherit outline-none" type="text">
+      <input
+        ref="iptRef" v-model="value"
+        class="w-full rounded-lg bg-transparent px-3 py-3 text-16px font-500 font-mono text-inherit outline-none"
+        type="text"
+      >
     </div>
     <div class="min-h-50">
       <div v-if="loading" class="hw-full min-h-50 flex-center">

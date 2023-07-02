@@ -11,9 +11,10 @@ definePageMeta({
         Hi. My name is YuJie.Zhang. Nice to see you here. I am a frounted developer.
       </span>
     </div>
-    <div class="absolute right-1/20 top-5 min-h-30 border border-red">
-      TODO task list
-    </div>
+    <PreImg src="/my.jpg" :height="100" :width="100" />
+    <!-- TODO task list <br>
+      1. md file image preview [md文件的图片预览]
+      2. demo page thumbnail add [demo页面的缩略图预览] -->
   </div>
 </template>
 

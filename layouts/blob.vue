@@ -64,6 +64,8 @@ function handleShowAgain(e: string) {
   if (e === 'search')
     modalVisible.value = true
 }
+
+const iptVal = ref('')
 </script>
 
 <template>
@@ -71,10 +73,12 @@ function handleShowAgain(e: string) {
     <ActiveBgList :list="blobDataList" label-field="title" />
     <ButtonListAni v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray" @show-again="handleShowAgain">
       <template #popup>
-        <MutiSelectCard :list="selectCards" @change="(val: string[]) => selectedVals = val" />
+        <SelectCard :list="selectCards" :muti="false" @change="(val: string[]) => selectedVals = val" />
       </template>
     </ButtonListAni>
-    <SearchMask v-model:model-visible="modalVisible" />
+    <Modal v-model:model-visible="modalVisible">
+      <SelfInput v-model:value="iptVal" />
+    </Modal>
   </main>
 </template>
 

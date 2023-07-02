@@ -1,9 +1,12 @@
 <script lang='ts' setup>
+const props = defineProps<{
+  width?: string | number
+  top?: string | number
+}>()
+
 const modelVisible = defineModel<boolean>('modelVisible', { required: true, default: false })
-const iptVal = ref('')
 
 const modalConRef = ref<HTMLElement>()
-
 onClickOutside(modalConRef, () => {
   modelVisible.value = false
 })
@@ -17,9 +20,14 @@ onClickOutside(modalConRef, () => {
       enter-active-class="transition-opacity duration-300"
       leave-active-class="transition-opacity duration-300"
     >
-      <div v-if="modelVisible" class="absolute left-0 top-0 z-999 h-full w-full bg-gray-800 bg-op50">
-        <div ref="modalConRef" dark="border-#333 bg-#444 " class="top-100px z-9999 w-600px overflow-hidden border border-#e5e5e5 rounded-md bg-white px-5 py-3 shadow-md absolute-x-center">
-          <SelfInput v-model:value="iptVal" />
+      <div v-if="modelVisible" class="absolute-0 z-999 h-full w-full bg-gray-800 bg-op50">
+        <div
+          ref="modalConRef"
+          class="border-com bg-com p-com top-100px z-1000 w-600px rounded-md shadow-md absolute-x-center"
+        >
+          <div>
+            <slot />
+          </div>
         </div>
       </div>
     </Transition>

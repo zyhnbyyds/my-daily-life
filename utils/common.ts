@@ -31,3 +31,12 @@ export function arrFindNum(array: number[], isBigFlg = false) {
 
   return array.findIndex(item => item === sortedArr[sortedArr.length - 1])
 }
+
+/**
+ * 样式类型收窄
+ * @param judageAttribute 要收窄的属性
+ * @returns 返回对应的数据
+ */
+export function styleTypeReduce(judageAttributeVal: string | number) {
+  return typeof judageAttributeVal === 'number' ? `${judageAttributeVal}px` : judageAttributeVal
+}

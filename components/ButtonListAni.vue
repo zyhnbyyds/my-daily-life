@@ -1,10 +1,10 @@
 <script lang='ts' setup>
-export type Positions = 'top' | 'left' | 'bottom' | 'right'
+// export type Positions = 'top' | 'left' | 'bottom' | 'right'
 
 interface Props {
   list: Components.BtnListItem[]
-  place?: Positions
-  value: string | number
+  // place?: Positions
+  value: string
   position?: [number, number, number, number]
   size?: number | string
   popupValue?: string
@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 const emits = defineEmits<Emits>()
 
-const value = defineModel<string | number>('value', { required: true })
+const value = defineModel<string>('value', { required: true })
 
 const isShowPopup = ref(false)
 const btnListRef = ref<HTMLElement | null>(null)
@@ -56,7 +56,7 @@ function hadnleClickItem(item: Components.BtnListItem) {
       >
         <div
           :style="{ width: item.value === value ? `${item.label.length * 16 + 100}px` : '40px' }"
-          class="h-40px flex-center cursor-pointer border border-lightBlue-200 rounded-full py2 trans-all-300-ease"
+          class="shadow-com h-40px flex-center cursor-pointer rounded-full py2 trans-all-300-ease"
         >
           <Icon :name="item.icon" :size="typeof props.size === 'number' ? `${props.size}px` : props.size" />
           <div v-show="item.value === value" class="ml-2 truncate">

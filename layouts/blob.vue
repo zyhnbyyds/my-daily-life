@@ -59,12 +59,17 @@ onKeyStroke(['Ctrl', 'k'], (e) => {
   e.preventDefault()
   modalVisible.value = true
 })
+
+function handleShowAgain(e: string) {
+  if (e === 'search')
+    modalVisible.value = true
+}
 </script>
 
 <template>
   <main class="w-full flex justify-center">
     <ActiveBgList :list="blobDataList" label-field="title" />
-    <ButtonListAni v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray">
+    <ButtonListAni v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray" @show-again="handleShowAgain">
       <template #popup>
         <MutiSelectCard :list="selectCards" @change="(val: string[]) => selectedVals = val" />
       </template>

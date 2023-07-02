@@ -10,11 +10,17 @@ interface Props {
   popupValue?: string
 }
 
+interface Emits {
+  (event: 'showAgain', tarBtn: string): void
+}
+
 const props = withDefaults(defineProps<Props>(), {
   size: '22px',
 })
+const emits = defineEmits<Emits>()
 
 const value = defineModel<string | number>('value', { required: true })
+
 const isShowPopup = ref(false)
 const btnListRef = ref<HTMLElement | null>(null)
 
@@ -23,6 +29,10 @@ function hadnleClickItem(item: Components.BtnListItem) {
     isShowPopup.value = !isShowPopup.value
   else
     isShowPopup.value = false
+
+  // 当前已经是这个按钮，再次点击重新激活操作
+  if (item.value === toValue(value))
+    emits('showAgain', toValue(value) as string)
 
   value.value = item.value
 }

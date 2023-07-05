@@ -18,10 +18,17 @@ const modalVisible = ref(false)
       :src="src"
       @click="modalVisible = true"
     />
-    <Modal v-model:model-visible="modalVisible" :bg-transparent="true">
+    <Modal v-model:model-visible="modalVisible" top="30%" :bg-transparent="true">
       <img
         :src="src"
       >
+      <template #footer>
+        <div class="bottom-20 flex gap-20 rounded-6 bg-op-20 p-com absolute-x-center bg-com">
+          <div i-solar:rounded-magnifer-zoom-in-outline />
+          <div i-solar:rounded-magnifer-zoom-out-outline />
+          <div i-solar:restart-square-outline />
+        </div>
+      </template>
     </Modal>
   </div>
 </template>

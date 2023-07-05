@@ -8,8 +8,9 @@ updateTime: 2023-06-29 22:10:02
 ## 根据对象的某一属性值来进行数组的排序
 
 使用typescript, 接收一个泛型参数T, 暂时只支持数字属性的排序。
-
 话不多说上代码：
+
+::pre-img{src="/preview.jpg"}
 
 ```typescript
 /**

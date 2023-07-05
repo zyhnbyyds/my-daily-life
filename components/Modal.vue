@@ -1,8 +1,15 @@
 <script lang='ts' setup>
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   width?: string | number
   top?: string | number
-}>()
+  bgTransparent?: boolean
+}>(), {
+  width: 600,
+  top: 100,
+  bgTransparent: false,
+})
+
+const { width, top, bgTransparent } = toRefs(props)
 
 const modelVisible = defineModel<boolean>('modelVisible', { required: true, default: false })
 
@@ -23,11 +30,14 @@ onClickOutside(modalConRef, () => {
       <div v-if="modelVisible" class="absolute-0 z-999 h-full w-full bg-gray-800 bg-op50">
         <div
           ref="modalConRef"
-          class="border-com bg-com p-com top-100px z-1000 w-600px rounded-md shadow-md absolute-x-center"
+          :style="{ width: styleTypeReduce(width), top: styleTypeReduce(top) }"
+          class="z-1000 rounded-md p-com shadow-md absolute-x-center border-com bg-com"
+          :class="{ '!bg-op-0 !border-op-0 !shadow-none': bgTransparent }"
         >
-          <div>
-            <slot />
-          </div>
+          <slot />
+        </div>
+        <div>
+          <slot name="footer" />
         </div>
       </div>
     </Transition>

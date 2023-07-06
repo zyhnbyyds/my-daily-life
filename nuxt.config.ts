@@ -80,7 +80,6 @@ export default defineNuxtConfig({
   ],
 
   image: {
-    inject: true,
     provider: 'netlify',
   },
 

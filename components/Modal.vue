@@ -14,9 +14,9 @@ const { width, top, bgTransparent } = toRefs(props)
 const modelVisible = defineModel<boolean>('modelVisible', { required: true, default: false })
 
 const modalConRef = ref<HTMLElement>()
-onClickOutside(modalConRef, () => {
-  modelVisible.value = false
-})
+// onClickOutside(modalConRef, () => {
+//   modelVisible.value = false
+// })
 </script>
 
 <template>
@@ -27,16 +27,16 @@ onClickOutside(modalConRef, () => {
       enter-active-class="transition-opacity duration-300"
       leave-active-class="transition-opacity duration-300"
     >
-      <div v-if="modelVisible" class="absolute-0 z-999 h-full w-full bg-gray-800 bg-op50">
+      <div v-if="modelVisible" class="absolute-0 z-999 h-full max-h-100vh w-full overflow-hidden bg-gray-800 bg-op50" @click.self.prevent="modelVisible = false">
         <div
-          ref="modalConRef"
           :style="{ width: styleTypeReduce(width), top: styleTypeReduce(top) }"
           class="z-1000 rounded-md p-com shadow-md absolute-x-center border-com bg-com"
           :class="{ '!bg-op-0 !border-op-0 !shadow-none': bgTransparent }"
         >
           <slot />
+          <!-- JustForImgPre -->
         </div>
-        <div>
+        <div class="bottom-10 z-9999 absolute-x-center">
           <slot name="footer" />
         </div>
       </div>

@@ -25,6 +25,7 @@ watch(() => toValue(value), (_val) => {
 
 async function handleGetNearArtical(target: string) {
   toggle(true)
+  const before = Date.now()
   const res = await queryContent('blob')
     .where({ title: { $regex: target } })
     .only(['_path', 'title', 'createTime'])
@@ -36,7 +37,17 @@ async function handleGetNearArtical(target: string) {
       createTime: useDateFormat(item.createTime, 'YYYY-MM-DD') as unknown as string,
     }
   })
-  toggle(false)
+  const after = Date.now()
+
+  // 确保loading有300ms的持续时间
+  if (after - before < 300) {
+    setTimeout(() => {
+      toggle(false)
+    }, 300 - after + before)
+  }
+  else {
+    toggle(false)
+  }
 }
 
 onMounted(() => {

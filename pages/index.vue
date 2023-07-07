@@ -11,10 +11,11 @@ definePageMeta({
         Hi. My name is YuJie.Zhang. Nice to see you here. I am a frounted developer.
       </span>
     </div>
-    <PreImg src="/my.jpg" :height="100" :width="100" />
     <!-- TODO task list <br>
       1. md file image preview [md文件的图片预览]
-      2. demo page thumbnail add [demo页面的缩略图预览] -->
+      2. demo page thumbnail add [demo页面的缩略图预览]
+      3. 音乐播放器的实现
+    -->
   </div>
 </template>
 

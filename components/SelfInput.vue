@@ -26,7 +26,7 @@ watch(() => toValue(value), (_val) => {
 async function handleGetNearArtical(target: string) {
   toggle(true)
   const before = Date.now()
-  const res = await queryContent('blob')
+  const res = await queryContent('artical')
     .where({ title: { $regex: target } })
     .only(['_path', 'title', 'createTime'])
     .find() as ResType[]

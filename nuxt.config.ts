@@ -22,6 +22,12 @@ export default defineNuxtConfig({
     'nuxt-typed-router',
     'unplugin-icons/nuxt',
     '@nuxt/image',
+    ['@pinia/nuxt', {
+      autoImport: [
+        'defineStore',
+        ['defineStore', 'definePiniaStore'],
+      ],
+    }],
   ],
 
   content: {
@@ -52,7 +58,7 @@ export default defineNuxtConfig({
       },
     },
     prerender: {
-      routes: ['/blob', '/demo', '/'],
+      routes: ['/', '/artical', '/demo'],
     },
   },
 

@@ -26,6 +26,9 @@ devDependencies:
   '@nuxtjs/color-mode':
     specifier: ^3.3.0
     version: 3.3.0(rollup@3.26.1)
+  '@pinia/nuxt':
+    specifier: ^0.4.11
+    version: 0.4.11(rollup@3.26.1)(typescript@5.1.6)(vue@3.3.4)
   '@types/nprogress':
     specifier: ^0.2.0
     version: 0.2.0
@@ -53,6 +56,9 @@ devDependencies:
   nuxt-typed-router:
     specifier: ^3.2.4
     version: 3.2.4(rollup@3.26.1)
+  pinia:
+    specifier: ^2.1.4
+    version: 2.1.4(typescript@5.1.6)(vue@3.3.4)
   typescript:
     specifier: ^5.1.6
     version: 5.1.6
@@ -1541,6 +1547,19 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
+    dev: true
+
+  /@pinia/nuxt@0.4.11(rollup@3.26.1)(typescript@5.1.6)(vue@3.3.4):
+    resolution: {integrity: sha512-bhuNFngJpmBCdAqWguezNJ/oJFR7wvKieqiZrmmdmPR07XjsidAw8RLXHMZE9kUm32M9E6T057OBbG/22jERTg==}
+    dependencies:
+      '@nuxt/kit': 3.6.2(rollup@3.26.1)
+      pinia: 2.1.4(typescript@5.1.6)(vue@3.3.4)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - rollup
+      - supports-color
+      - typescript
+      - vue
     dev: true
 
   /@pkgjs/parseargs@0.11.0:
@@ -7848,6 +7867,24 @@ packages:
       - postcss
       - sass
       - supports-color
+    dev: true
+
+  /pinia@2.1.4(typescript@5.1.6)(vue@3.3.4):
+    resolution: {integrity: sha512-vYlnDu+Y/FXxv1ABo1vhjC+IbqvzUdiUC3sfDRrRyY2CQSrqqaa+iiHmqtARFxJVqWQMCJfXx1PBvFs9aJVLXQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.3.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.5.0
+      typescript: 5.1.6
+      vue: 3.3.4
+      vue-demi: 0.14.5(vue@3.3.4)
     dev: true
 
   /pinkie-promise@2.0.1:

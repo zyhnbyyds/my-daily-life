@@ -16,7 +16,7 @@ export default defineAppConfig({
     {
       label: 'Artical',
       icon: 'solar:ruler-cross-pen-broken',
-      value: '/blob',
+      value: '/artical',
     },
     {
       label: 'Demo',

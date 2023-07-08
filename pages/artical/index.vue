@@ -1,6 +1,6 @@
 <script lang='ts' setup>
 definePageMeta({
-  layout: 'blob',
+  layout: 'artical',
 })
 </script>
 

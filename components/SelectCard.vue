@@ -22,25 +22,27 @@ const props = withDefaults(defineProps<Props>(), {
 const emits = defineEmits<Emits>()
 
 const { list, customClass, muti } = toRefs(props)
-const vals = ref<string[]>([])
+
+// const values = ref(toValue(list).length > 0 ? [toValue(list)[0].value] : [])
+const values = defineModel<string[]>('values')
 
 function handleClickFn(targetItem: MutiSelectCardItem) {
-  const valueS = toValue(vals)
+  if (!values.value)
+    return
 
   if (toValue(muti)) {
-    const index = valueS.findIndex(item => item === targetItem.value)
+    const index = values.value.findIndex(item => item === targetItem.value)
 
     if (index === -1)
-      valueS.push(targetItem.value)
+      values.value.push(targetItem.value)
 
     else
-      valueS.splice(index, 1)
+      values.value.splice(index, 1)
   }
   else {
-    vals.value = []
-    vals.value.push(targetItem.value)
+    values.value = [targetItem.value]
   }
-  emits('change', valueS)
+  emits('change', values.value)
 }
 </script>
 
@@ -51,7 +53,7 @@ function handleClickFn(targetItem: MutiSelectCardItem) {
       v-for="item, i in list"
       :key="i"
       class="cursor-pointer rounded-20px px-4 py-2 transition-all"
-      :class="{ 'text-[rgb(26,214,255)] bg-gray-200 dark:bg-my-20': vals.includes(item.value), [customClass]: true }"
+      :class="{ 'text-[rgb(26,214,255)] bg-gray-200 dark:bg-my-20': values ? values.includes(item.value) : false, [customClass]: true }"
       @click="handleClickFn(item)"
     >
       {{ item.label }}

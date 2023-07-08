@@ -1,5 +1,7 @@
 <script lang='ts' setup>
-const blobDataList = ref<any[]>([])
+import { useTestStore } from '@/stores/artical'
+
+const articalDataList = ref<any[]>([])
 
 const buttons: Components.BtnListItem[] = [
   {
@@ -19,21 +21,6 @@ const buttons: Components.BtnListItem[] = [
   },
 ]
 
-const selectCards = [
-  {
-    label: '博客',
-    value: 'blob',
-  },
-  {
-    label: '生活',
-    value: 'life',
-  },
-  {
-    label: '日记',
-    value: 'daily',
-  },
-]
-
 const settings = {
   headerTabStyle: [
     {
@@ -48,7 +35,9 @@ const settings = {
 }
 
 const app = useAppConfig()
-const selectedVals = ref<(string)[]>([selectCards[0].value])
+const router = useRouter()
+const test = useTestStore()
+
 const activeBtn = ref(buttons[0].value)
 const modalVisible = ref(false)
 const drawerVisible = ref(false)
@@ -82,10 +71,10 @@ function handleShowAgain(e: string) {
     drawerVisible.value = !drawerVisible.value
 }
 
-function fetchGetContentPage() {
+function fetchGetContentPage(articalType: string) {
   loadAct(true)
-  queryContent('blob').only(['_path', 'title', 'createTime']).sort({ createTime: -1 }).find().then((res) => {
-    blobDataList.value = res.map((item) => {
+  queryContent(`/artical/${articalType}`).only(['_path', 'title', 'createTime']).sort({ createTime: -1 }).find().then((res) => {
+    articalDataList.value = res.map((item) => {
       return {
         ...item,
         createTime: useDateFormat(item.createTime, 'YYYY-MM-DD'),
@@ -95,31 +84,41 @@ function fetchGetContentPage() {
   })
 }
 
-fetchGetContentPage()
+watch(() => test.activeArticalPath, (val) => {
+  handleSelectChange(val)
+})
+
+function handleSelectChange(vals: string[]) {
+  // @ts-expect-error this is just because of the type limit for routepath
+  router.push(`/artical/${vals[0]}`)
+  fetchGetContentPage(vals[0])
+}
+
+fetchGetContentPage(test.activeArticalPath[0])
 </script>
 
 <template>
   <main class="w-full flex justify-center pb-40">
-    <ActiveBgList v-if="!loading" :list="blobDataList" label-field="title" />
+    <ActiveBgList v-if="!loading" :list="articalDataList" label-field="title" />
     <div v-else h-100 w-full flex-center>
       <Icon size="30" name="svg-spinners:clock" />
     </div>
     <Transition name="fade">
       <ButtonListAni v-show="!isScrolling" v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray" @show-again="handleShowAgain">
         <template #popup>
-          <SelectCard :list="selectCards" :muti="false" @change="(val: string[]) => selectedVals = val" />
+          <SelectCard v-model:values="test.activeArticalPath " :list="test.selectCards" :muti="false" />
         </template>
       </ButtonListAni>
     </Transition>
     <Modal v-model:model-visible="modalVisible">
       <SelfInput v-model:value="iptVal" />
     </Modal>
-    <Drawer v-model:visible="drawerVisible" title="设置中心">
+    <Drawer v-model:visible="drawerVisible" :width="400" title="设置中心">
       <div class="h-60px flex-col-center">
         <span class="mr-5">头部样式</span>
         <Tab
           v-model:value="activeSelectHeaderStyleVal"
-          class="text-14px font-normal"
+          class="text-14px font-normal border-com"
           :tabs="settings.headerTabStyle"
           @update:value="(val) => app.isHeaderTextOrIcon = val as string"
         />

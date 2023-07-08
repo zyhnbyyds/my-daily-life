@@ -29,14 +29,14 @@ const nextDataTransformed = computed(() => {
 <template>
   <div>
     <BackTo :parent-path="path" />
-    <div px-3>
+    <div px-6>
       <ContentRenderer :value="data">
         <ContentRendererMarkdown :value="data" />
         <template #empty>
           <p>No content found.</p>
         </template>
       </ContentRenderer>
-      <NextPageBtn :pre="nextDataTransformed ? nextDataTransformed[0] : null" :next="nextDataTransformed ? nextDataTransformed[1] : null" />
+      <NextPageBtn class="mb-10" :pre="nextDataTransformed ? nextDataTransformed[0] : null" :next="nextDataTransformed ? nextDataTransformed[1] : null" />
     </div>
   </div>
 </template>

@@ -36,11 +36,12 @@ function hadnleClickItem(item: Components.BtnListItem) {
 
   value.value = item.value
 }
+// watch(isScrolling?.value, () => {})
 </script>
 
 <!-- 带有动画效果的按钮集合 -->
 <template>
-  <div class="fixed bottom-10 left-1/2 rounded-30px bg-#999 bg-op-20 p-3 -translate-x-1/2">
+  <div class="fixed bottom-10 left-1/2 z-10 rounded-30px bg-#eee p-3 shadow-md -translate-x-1/2 dark:bg-#555">
     <div
       :style="{ width: `${btnListRef?.offsetWidth}px` || 'auto' }"
       class="overflow-hidden transition-height duration-300"
@@ -56,7 +57,7 @@ function hadnleClickItem(item: Components.BtnListItem) {
       >
         <div
           :style="{ width: item.value === value ? `${item.label.length * 16 + 100}px` : '40px' }"
-          class="shadow-com h-40px flex-center cursor-pointer rounded-full py2 trans-all-300-ease"
+          class="h-40px flex-center cursor-pointer rounded-full py2 trans-all-300-ease shadow-com"
         >
           <Icon :name="item.icon" :size="typeof props.size === 'number' ? `${props.size}px` : props.size" />
           <div v-show="item.value === value" class="ml-2 truncate">

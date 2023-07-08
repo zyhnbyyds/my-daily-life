@@ -16,8 +16,10 @@ useSeoMeta({
 const { paths } = useAppConfig()
 
 const toTopRef = ref<HTMLElement>()
-const { y } = useScroll(toTopRef, { behavior: 'smooth' })
+const { y, isScrolling } = useScroll(toTopRef, { behavior: 'smooth' })
 const nuxtApp = useNuxtApp()
+
+provide('isScrolling', isScrolling)
 
 nprogress.configure({ showSpinner: false })
 
@@ -53,12 +55,4 @@ watch(() => route.path, (_path) => {
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 1s;
-}
-
-.fade-leave-to {
-  transform: translateX(-10px);
-}
 </style>

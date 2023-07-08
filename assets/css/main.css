@@ -13,6 +13,9 @@ html.dark {
   background: #444;
   color: #ffffee;
 }
+body {
+  overflow: hidden;
+}
 
 .scroll-style::-webkit-scrollbar, pre::-webkit-scrollbar {
   display: block;

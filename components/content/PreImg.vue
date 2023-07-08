@@ -23,8 +23,6 @@ const imgStyle = computed(() => {
   }
 })
 
-const { x, y } = useMouse()
-
 /** 点击进行缩放 */
 function handleScale(flag: '-' | '+' | 'reset') {
   if (flag === '+' && toValue(scaleLevel) <= 3)
@@ -40,20 +38,19 @@ function handleScale(flag: '-' | '+' | 'reset') {
 
 <template>
   <div>
-    {{ `x: ${x}, y": ${y}` }}
     <nuxt-img
-      cursor-pointer
+      my-4 cursor-pointer
       :src="src"
       @click="modalVisible = true"
     />
     <Modal v-model:model-visible="modalVisible" top="20%" :bg-transparent="true">
-      <img
+      <nuxt-img
         :dropzone="true"
         :draggable="true"
         :style="imgStyle"
         class="duration-300 transition-ease"
         :src="src"
-      >
+      />
       <template #footer>
         <div class="bottom-10 flex gap-7 rounded-6 bg-#334 bg-op-20 bg-op-20 px-3 py-2 text-28px text-#fff absolute-x-center">
           <Icon class="cursor-pointer" name="solar:rounded-magnifer-zoom-in-outline" @click="handleScale('+')" />

@@ -14,9 +14,6 @@ const { width, top, bgTransparent } = toRefs(props)
 const modelVisible = defineModel<boolean>('modelVisible', { required: true, default: false })
 
 const modalConRef = ref<HTMLElement>()
-// onClickOutside(modalConRef, () => {
-//   modelVisible.value = false
-// })
 </script>
 
 <template>

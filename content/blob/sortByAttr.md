@@ -10,7 +10,7 @@ updateTime: 2023-06-29 22:10:02
 使用typescript, 接收一个泛型参数T, 暂时只支持数字属性的排序。
 话不多说上代码：
 
-::pre-img{src="/life/boy.png"}
+::pre-img{src="/life/sky.png"}
 
 ```typescript
 /**

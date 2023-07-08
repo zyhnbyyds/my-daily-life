@@ -65,7 +65,7 @@ onMounted(() => {
         type="text"
       >
     </div>
-    <div class="min-h-50">
+    <div class="scroll-style max-h-160 min-h-50 overflow-y-scroll">
       <div v-if="loading" class="hw-full min-h-50 flex-center">
         <Icon size="25" name="svg-spinners:bars-scale" />
       </div>

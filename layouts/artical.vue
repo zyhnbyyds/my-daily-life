@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import { useTestStore } from '@/stores/artical'
+import { useArticalStore } from '@/stores/artical'
 
 const articalDataList = ref<any[]>([])
 
@@ -36,7 +36,7 @@ const settings = {
 
 const app = useAppConfig()
 const router = useRouter()
-const test = useTestStore()
+const articalStore = useArticalStore()
 
 const activeBtn = ref(buttons[0].value)
 const modalVisible = ref(false)
@@ -84,7 +84,7 @@ function fetchGetContentPage(articalType: string) {
   })
 }
 
-watch(() => test.activeArticalPath, (val) => {
+watch(() => articalStore.activeArticalPath, (val) => {
   handleSelectChange(val)
 })
 
@@ -94,7 +94,7 @@ function handleSelectChange(vals: string[]) {
   fetchGetContentPage(vals[0])
 }
 
-fetchGetContentPage(test.activeArticalPath[0])
+fetchGetContentPage(articalStore.activeArticalPath[0])
 </script>
 
 <template>
@@ -106,7 +106,7 @@ fetchGetContentPage(test.activeArticalPath[0])
     <Transition name="fade">
       <ButtonListAni v-show="!isScrolling" v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray" @show-again="handleShowAgain">
         <template #popup>
-          <SelectCard v-model:values="test.activeArticalPath " :list="test.selectCards" :muti="false" />
+          <SelectCard v-model:values="articalStore.activeArticalPath " :list="articalStore.selectCards" :muti="false" />
         </template>
       </ButtonListAni>
     </Transition>

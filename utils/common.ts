@@ -40,3 +40,17 @@ export function arrFindNum(array: number[], isBigFlg = false) {
 export function styleTypeReduce(judageAttributeVal: string | number) {
   return typeof judageAttributeVal === 'number' ? `${judageAttributeVal}px` : judageAttributeVal
 }
+
+/**
+ * 将对象格式的样式块填充到html元素中
+ * @param targetObj 目标对象像是块
+ * @param ele 目标填充元素
+ */
+export function handleObjStyleToElement<T extends object>(targetObj: T, ele: Ref<HTMLElement | null>) {
+  if (!ele.value)
+    return
+  type Keys = keyof typeof targetObj
+  Object.keys(targetObj).forEach((key: any) => {
+    ele.value!.style[key] = targetObj[key as Keys]
+  })
+}

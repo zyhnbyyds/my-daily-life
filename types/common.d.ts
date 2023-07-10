@@ -5,3 +5,10 @@ declare namespace Components {
     icon: string
   }
 }
+
+declare namespace MusicApi {
+  interface ApiRes<T> {
+    code: number
+    data: T
+  }
+}

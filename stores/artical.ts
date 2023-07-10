@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useTestStore = defineStore('test-store', () => {
+export const useArticalStore = defineStore('artical-store', () => {
   const selectCards = reactive([
     {
       label: '博客',

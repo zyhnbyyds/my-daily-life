@@ -28,6 +28,7 @@ export default defineConfig({
     ['border-com', 'dark:border-#222  border border-#e5e5e5'],
     ['bg-com', 'dark:bg-#333 bg-white'],
     ['shadow-com', 'border-t-1 border-#333 shadow-md border-op-20 dark:border-op-60 dark:shadow-#333'],
+    ['btn', 'px-3 py-2 bg-com'],
   ],
   presets: [
     presetUno(),

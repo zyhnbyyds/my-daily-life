@@ -51,6 +51,10 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
 
+  devServer: {
+    port: 3001,
+  },
+
   nitro: {
     esbuild: {
       options: {
@@ -59,6 +63,9 @@ export default defineNuxtConfig({
     },
     prerender: {
       routes: ['/', '/artical', '/demo'],
+    },
+    devProxy: {
+      '/proxy/music': { target: 'http://localhost:3000', changeOrigin: true },
     },
   },
 

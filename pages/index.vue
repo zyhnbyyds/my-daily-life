@@ -1,4 +1,6 @@
 <script lang='ts' setup>
+import type { LyricItem } from '@/components/LyricsList.vue'
+
 // import { useQRCode } from '@vueuse/integrations/useQRCode'
 // import { useAppStore } from '@/stores/app'
 
@@ -19,15 +21,37 @@ const audio = ref<HTMLAudioElement | null>(null)
 // appStore.resume()
 
 // const { data } = await useFetch<any>('/proxy/music/user/account')
-// const { data } = await useFetch<any>('/proxy/music/lyric', { params: { id: 1988564487 } })
-const { data: songUrl } = await useFetch<any>('/proxy/music/song/url', { params: { id: 1988564487 } })
-// const { data: song } = await useFetch<any>('/proxy/music/song/detail', { params: { ids: '1988564487' } })
-// const { data } = await useFetch<any>('/proxy/music/likelist', { params: { uid: 1670075991 } })
+const { data } = await useFetch<any>('/proxy/music/lyric', { params: { id: 386844 } })
+const { data: songUrl } = await useFetch<any>('/proxy/music/song/url', { params: { id: 386844 } })
+const { data: song } = await useFetch<any>('/proxy/music/song/detail', { params: { ids: '386844' } })
+// const { data: testList } = await useFetch<any>('/proxy/music/likelist', { params: { uid: 1670075991 } })
+// 430685732 386844 1374701777 39637593 1841002409
+// console.log(testList.value)
 
 // TODO ToDo
 const { playing, currentTime, duration } = useMediaControls(audio, {
   src: songUrl.value ? songUrl.value.data[0].url : '',
 })
+
+const lyrics = ref<LyricItem[]>([])
+
+const parttern = /\[\d{2}:\d{2}\.\d{3}\]/
+
+function handleLyric() {
+  if (data.value) {
+    const lyricArrays = (data.value.lrc.lyric as string).split('\n')
+    lyrics.value = lyricArrays.map((item: string, index: number) => {
+      const time = hadnleStringTimeToNumber(parttern.exec(item) ? parttern.exec(item)![0] : '')
+
+      const nextItem = lyricArrays[index + 1]
+      const nextTime = nextItem ? hadnleStringTimeToNumber(parttern.exec(nextItem) ? parttern.exec(nextItem)![0] : '') : -1
+
+      const singleLyricduration = nextTime === -1 ? 2 : nextTime - time
+      return { label: item.replace(parttern, ''), time, duration: Number.parseFloat(singleLyricduration.toFixed(3)) }
+    })
+  }
+}
+handleLyric()
 </script>
 
 <template>
@@ -35,10 +59,16 @@ const { playing, currentTime, duration } = useMediaControls(audio, {
     <span class="pl-7 text-6">
       Hi. My name is YuJie.Zhang. Nice to see you here. I am a frounted developer.
     </span>
-    <!-- <div>
-      {{ data ? data.lrc.lyric : '' }}
-    </div> -->
-    <PlayBar v-model:playing="playing" />
+    <PlayBar
+      v-model:playing="playing"
+      :current-time="currentTime"
+      :song-name="song ? song.songs[0].name : '未知歌曲'"
+      :lyrics="lyrics"
+      :song-pic="song ? song.songs
+        [0].al.picUrl : '/my.jpg'"
+      :singer="song
+        ? song.songs[0].ar.map((item: any) => item.name).join('/') : ''"
+    />
     <!-- <input v-model="currentTime" type="number"> -->
     <audio ref="audio" />
     <!-- TODO task list <br>

@@ -16,7 +16,6 @@ const props = defineProps<{
 const { duration, currentTime, lyrics, songPic, songName } = toRefs(props)
 
 const playing = defineModel<boolean>('playing', { default: false })
-// const currentTime = defineModel<number>('currentTime', { default: 0 })
 const [isopen, toggole] = useToggle()
 const maskRef = ref<HTMLElement | null>(null)
 </script>

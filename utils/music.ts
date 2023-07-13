@@ -1,3 +1,8 @@
+/**
+ * 将网易云歌词秒和毫秒转化为时间戳格式时间
+ * @param numberTime 传入秒级时间
+ * @returns 时间戳格式时间[00:00.123]
+ */
 export function handleNumberTimeToString(numberTime: number) {
   const arrs = numberTime.toString().split('.')
   if (arrs.length !== 2)
@@ -8,6 +13,11 @@ export function handleNumberTimeToString(numberTime: number) {
 }
 
 // Gpt生成
+/**
+ * 将网易云歌词的时间戳格式时间转化为秒和毫秒
+ * @param timeString 时间戳格式时间[00:00.123]
+ * @returns 秒级时间 0.123
+ */
 export function hadnleStringTimeToNumber(timeString: string) {
   const { cloned } = useCloned(timeString)
 
@@ -27,11 +37,4 @@ export function hadnleStringTimeToNumber(timeString: string) {
 
   // 如果时间格式无效，则返回 null 或适当的错误值
   return -1
-}
-
-export function handleGetRangePoifromArray(array: number[], compareNum: number) {
-  const index = array.findIndex(item => item === compareNum)
-
-  if (index !== -1)
-    return index
 }

@@ -1,5 +1,16 @@
 <script lang='ts' setup>
-import type { LyricItem } from '@/components/LyricsList.vue'
+interface SongInfo {
+  lyrics: {
+    label: string
+    time: number
+    duration: number
+  }[]
+  playUrl: string
+  likeList: Music.Song[]
+  name: string
+  pic: string
+  singer: string
+}
 
 // import { useQRCode } from '@vueuse/integrations/useQRCode'
 // import { useAppStore } from '@/stores/app'
@@ -9,49 +20,73 @@ definePageMeta({
 })
 
 const audio = ref<HTMLAudioElement | null>(null)
-// const appStore = useAppStore()
-// const { data: qrcodekey } = await useFetch<MusicApi.ApiRes<{ unikey: string; code: number }>>('/proxy/music/login/qr/key')
 
-// appStore.qrcodeKey = qrcodekey.value?.data.unikey ?? ''
-
-// const { data: qrcodeUrl } = await useFetch<MusicApi.ApiRes<{ qrurl: string; qrimg: string }>>('/proxy/music/login/qr/create', { params: { key: appStore.qrcodeKey } })
-
-// const qrcodeUrltrans = useQRCode(qrcodeUrl.value?.data.qrurl ?? '无数据')
-
-// appStore.resume()
-
-// const { data } = await useFetch<any>('/proxy/music/user/account')
-const { data } = await useFetch<any>('/proxy/music/lyric', { params: { id: 386844 } })
-const { data: songUrl } = await useFetch<any>('/proxy/music/song/url', { params: { id: 386844 } })
-const { data: song } = await useFetch<any>('/proxy/music/song/detail', { params: { ids: '386844' } })
-// const { data: testList } = await useFetch<any>('/proxy/music/likelist', { params: { uid: 1670075991 } })
-// 430685732 386844 1374701777 39637593 1841002409
-// console.log(testList.value)
-
-// TODO ToDo
-const { playing, currentTime, duration } = useMediaControls(audio, {
-  src: songUrl.value ? songUrl.value.data[0].url : '',
+const somethingAboutSong = reactive<SongInfo>({
+  lyrics: [],
+  playUrl: '',
+  likeList: [],
+  name: '****',
+  pic: '/my.jpg',
+  singer: '',
 })
 
-const lyrics = ref<LyricItem[]>([])
+const likeIds = ref<number[]>([])
+const songPlayUrl = ref<string>('')
 
 const parttern = /\[\d{2}:\d{2}\.\d{3}\]/
 
-function handleLyric() {
-  if (data.value) {
-    const lyricArrays = (data.value.lrc.lyric as string).split('\n')
-    lyrics.value = lyricArrays.map((item: string, index: number) => {
-      const time = hadnleStringTimeToNumber(parttern.exec(item) ? parttern.exec(item)![0] : '')
+const { playing, currentTime, duration } = useMediaControls(audio, {
+  src: songPlayUrl,
+})
 
-      const nextItem = lyricArrays[index + 1]
-      const nextTime = nextItem ? hadnleStringTimeToNumber(parttern.exec(nextItem) ? parttern.exec(nextItem)![0] : '') : -1
+function handleLyric(lyricGet: string | undefined) {
+  if (!lyricGet)
+    return []
+  const lyricArrays = lyricGet.split('\n')
+  return lyricArrays.map((item: string, index: number) => {
+    const time = hadnleStringTimeToNumber(parttern.exec(item) ? parttern.exec(item)![0] : '')
 
-      const singleLyricduration = nextTime === -1 ? 2 : nextTime - time
-      return { label: item.replace(parttern, ''), time, duration: Number.parseFloat(singleLyricduration.toFixed(3)) }
-    })
-  }
+    const nextItem = lyricArrays[index + 1]
+    const nextTime = nextItem ? hadnleStringTimeToNumber(parttern.exec(nextItem) ? parttern.exec(nextItem)![0] : '') : -1
+
+    const singleLyricduration = nextTime === -1 ? 2 : nextTime - time
+    return { label: item.replace(parttern, ''), time, duration: Number.parseFloat(singleLyricduration.toFixed(3)) }
+  })
 }
-handleLyric()
+
+async function loadData() {
+  const { data: res } = await useFetch<Music.SongsLikeIdList>('/proxy/music/likelist', { params: { uid: 1670075991 } })
+  likeIds.value = res.value ? res.value.ids : []
+  const { data: song } = await useFetch<Music.SongDetailList>('/proxy/music/song/detail', { params: { ids: likeIds.value ? likeIds.value.join(',') : '' } })
+
+  somethingAboutSong.likeList = song.value ? song.value.songs : []
+
+  if (toValue(likeIds).length >= 1)
+    handleSongChange(toValue(likeIds)[0])
+}
+
+async function handleSongChange(id: number) {
+  playing.value = false
+  const { data: lyrics } = await useFetch<Music.SongLyric>('/proxy/music/lyric', { params: { id } })
+  const { data: playUrl } = await useFetch<Music.SongPlayUrl>('/proxy/music/song/url', { params: { id } })
+  const { data: songDetail } = await useFetch<Music.SongDetailList>('/proxy/music/song/detail', { params: { ids: id } })
+
+  const currentSong = songDetail.value ? songDetail.value.songs[0] : null
+  songPlayUrl.value = playUrl.value ? playUrl.value.data[0].url : ''
+
+  Object.assign(somethingAboutSong, {
+    lyrics: lyrics.value ? handleLyric(lyrics.value.lrc.lyric) : [],
+    name: currentSong ? currentSong.name : '***',
+    pic: currentSong ? currentSong.al.picUrl : '/my.jpg',
+    singer: currentSong ? currentSong.ar.map((item: any) => item.name).join('/') : '佚名',
+  })
+
+  nextTick(() => {
+    playing.value = true
+  })
+}
+
+loadData()
 </script>
 
 <template>
@@ -61,15 +96,15 @@ handleLyric()
     </span>
     <PlayBar
       v-model:playing="playing"
-      :current-time="currentTime"
-      :song-name="song ? song.songs[0].name : '未知歌曲'"
-      :lyrics="lyrics"
-      :song-pic="song ? song.songs
-        [0].al.picUrl : '/my.jpg'"
-      :singer="song
-        ? song.songs[0].ar.map((item: any) => item.name).join('/') : ''"
+      v-model:current-time="currentTime"
+      :song-name="somethingAboutSong.name"
+      :lyrics="somethingAboutSong.lyrics"
+      :duration="duration"
+      :song-pic="somethingAboutSong.pic"
+      :singer="somethingAboutSong.singer"
+      :song-list="somethingAboutSong.likeList"
+      @song-change="handleSongChange"
     />
-    <!-- <input v-model="currentTime" type="number"> -->
     <audio ref="audio" />
     <!-- TODO task list <br>
       1. md file image preview [md文件的图片预览] done

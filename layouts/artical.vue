@@ -99,7 +99,7 @@ fetchGetContentPage(articalStore.activeArticalPath[0])
 
 <template>
   <main class="w-full flex justify-center pb-40">
-    <ActiveBgList v-if="!loading" :list="articalDataList" label-field="title" />
+    <ActiveBgList v-if="!loading" :is-route="true" :list="articalDataList" label-field="title" />
     <div v-else h-100 w-full flex-center>
       <Icon size="30" name="svg-spinners:clock" />
     </div>

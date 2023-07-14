@@ -75,17 +75,6 @@ watch(() => value.value, (val) => {
   movePlace.move = val / toValue(max)
 }, { immediate: true })
 
-// watch(() => movePlace.move, (val) => {
-//   if (!bar.value)
-//     return
-//   if (val < 0)
-//     movePlace.move = 0
-//   else if (val > 1)
-//     movePlace.move = 1
-
-//   value.value = movePlace.move * max.value
-// })
-
 onMounted(() => {
   if (!bar.value || !dotRef.value)
     return

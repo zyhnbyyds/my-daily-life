@@ -73,7 +73,7 @@ onMounted(() => {
         <div v-if="!queryList || queryList.length === 0" class="hw-full min-h-50 flex-center">
           no-data
         </div>
-        <ActiveBgList class="font-normal" :list="queryList" label-field="title" />
+        <ActiveBgList :is-route="true" class="font-normal" :list="queryList" label-field="title" />
       </div>
     </div>
   </div>

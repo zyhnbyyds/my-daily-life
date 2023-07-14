@@ -11,13 +11,33 @@ const props = defineProps<{
   singer: string
   /** 歌曲名 */
   songName: string
+  songList: Music.Song[] | undefined
 }>()
+
+const emits = defineEmits<{
+  (event: 'update:currentTime', val: number): void
+  (event: 'songChange', id: number): void }
+>()
 
 const { duration, currentTime, lyrics, songPic, songName } = toRefs(props)
 
+const currentTimeAct = computed({
+  get() {
+    return currentTime.value
+  },
+  set(val) {
+    emits('update:currentTime', val)
+  },
+})
+
 const playing = defineModel<boolean>('playing', { default: false })
-const [isopen, toggole] = useToggle()
+const [isopen, toggole] = useToggle(true)
 const maskRef = ref<HTMLElement | null>(null)
+const [isShowSongs, toggoleSongShow] = useToggle(false)
+
+function handleActiveChange(songId: number) {
+  emits('songChange', songId)
+}
 </script>
 
 <template>
@@ -51,7 +71,7 @@ const maskRef = ref<HTMLElement | null>(null)
       </div>
       <div class="flex gap-34px">
         <Icon size="22" name="material-symbols:computer-outline-rounded" />
-        <Icon size="22" name="material-symbols:format-list-bulleted-rounded" />
+        <Icon size="22" name="material-symbols:format-list-bulleted-rounded" @click="toggoleSongShow()" />
         <Icon size="22" name="carbon:volume-up" />
       </div>
     </div>
@@ -59,9 +79,14 @@ const maskRef = ref<HTMLElement | null>(null)
       class="bottom-1/2 h-full w-9/8 overflow-hidden rounded-4 trans-300 absolute-x-center -z-10 shadow-com bg-com"
       :class="{ 'w-9/7! h-140! rounded-4!': isopen }"
     >
-      <div class="absolute-0 bottom-0 w-full p-4 pb-20">
-        <LyricsList :current-time="currentTime" :lyrics="lyrics" />
-        <Progress v-model="currentTime" :max="duration" />
+      <div class="scroll-style absolute-0 bottom-0 w-full overflow-y-auto p-4 pb-20">
+        <div class="h-calc(100%-160px)">
+          <Transition name="fade">
+            <LyricsList v-if="isShowSongs" :current-time="currentTime" :lyrics="lyrics" />
+            <ActiveBgList v-else :list="songList ?? []" label-field="name" value-field="id" @change="handleActiveChange" />
+          </Transition>
+        </div>
+        <Progress v-model="currentTimeAct" :max="duration" />
       </div>
     </div>
   </div>

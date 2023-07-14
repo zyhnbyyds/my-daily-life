@@ -9,16 +9,24 @@ interface Props {
   list: ActiveBgListItem[]
   labelField?: string
   valueField?: string
+  isRoute?: boolean
+}
+
+interface Emits {
+  (event: 'change', id: any): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
   labelField: 'label',
   valueField: 'value',
+  isRoute: false,
 })
+const emits = defineEmits<Emits>()
 
-const { list, labelField } = toRefs(props)
+const { list, labelField, valueField, isRoute } = toRefs(props)
 const listRef = ref<HTMLElement>()
 const actDiv = ref<HTMLDivElement>()
+const router = useRouter()
 
 const childrenNodes = computed(() => {
   if (!listRef.value)
@@ -47,26 +55,43 @@ function mouseover(_ele: MouseEvent, index: number) {
     }, 100)
   }
 }
+
+function handleClickListItem(item: ActiveBgListItem, index: number) {
+  if (toValue(isRoute)) {
+    router.push(item._path ? item._path : '/')
+    return
+  }
+
+  if (!valueField.value) {
+    emits('change', index)
+    return
+  }
+  const keys = valueField.value.split('.')
+
+  if (keys.length === 1)
+    emits('change', item[keys[0]])
+
+  else if (keys.length === 2)
+    emits('change', item[keys[0]][keys[1]])
+}
 </script>
 
 <template>
   <div ref="listRef" class="relative z-2 max-w-3xl w-full flex flex-col" @mouseleave="mouseleave">
     <div
       v-for="item, i in list" :key="i"
-      class="relative z-10 transition-transform duration-300" hover="text-#333 dark:text-#e5e5e5" active="scale-99"
-      @mouseover="mouseover($event, i)"
+      class="relative z-10 cursor-pointer transition-transform duration-300" hover="text-#333 dark:text-#e5e5e5" active="scale-99"
+      @mouseover="mouseover($event, i)" @click="handleClickListItem(item, i)"
     >
-      <NuxtLink class="leading-none" :to="item._path ? item._path : '/'">
-        <span class="flex items-center px-3 py-3">
-          <span>{{ item[labelField] }}</span>
-          <span v-if="item.createTime" class="pl-2 text-sm opacity-40">
-            <span class="i-carbon:time mr-1 inline-block align-middle" />
-            <span class="align-middle dark:text-[#e5e5e5]">
-              {{ item.createTime }}
-            </span>
+      <span class="flex items-center px-3 py-3 leading-none">
+        <span>{{ item[labelField] }}</span>
+        <span v-if="item.createTime" class="pl-2 text-sm opacity-40">
+          <span class="i-carbon:time mr-1 inline-block align-middle" />
+          <span class="align-middle dark:text-[#e5e5e5]">
+            {{ item.createTime }}
           </span>
         </span>
-      </NuxtLink>
+      </span>
     </div>
     <div ref="actDiv" class="absolute h-40px w-full rounded-sm bg-my-20 opacity-0 transition-all -top-40px" />
   </div>

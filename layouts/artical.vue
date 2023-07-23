@@ -1,4 +1,5 @@
 <script lang='ts' setup>
+import { loadingKeep } from '@/utils/common'
 import { useArticalStore } from '@/stores/artical'
 
 const articalDataList = ref<any[]>([])
@@ -44,7 +45,7 @@ const drawerVisible = ref(false)
 const iptVal = ref('')
 const isScrolling = inject<Ref<boolean>>('isScrolling')
 const activeSelectHeaderStyleVal = ref(settings.headerTabStyle[0].value)
-const [loading, loadAct] = useToggle()
+const [loading] = useToggle()
 
 watch(() => activeBtn.value, (val) => {
   if (val === 'search')
@@ -72,16 +73,16 @@ function handleShowAgain(e: string) {
 }
 
 function fetchGetContentPage(articalType: string) {
-  loadAct(true)
-  queryContent(`/artical/${articalType}`).only(['_path', 'title', 'createTime']).sort({ createTime: -1 }).find().then((res) => {
+  const queryFn = () => queryContent(`/artical/${articalType}`).only(['_path', 'title', 'createTime']).sort({ createTime: -1 }).find().then((res) => {
     articalDataList.value = res.map((item) => {
       return {
         ...item,
         createTime: useDateFormat(item.createTime, 'YYYY-MM-DD'),
       }
     })
-    loadAct(false)
   })
+
+  loadingKeep(queryFn, loading, () => true, 500)
 }
 
 watch(() => articalStore.activeArticalPath, (val) => {
@@ -101,7 +102,7 @@ fetchGetContentPage(articalStore.activeArticalPath[0])
   <main class="w-full flex justify-center pb-40">
     <ActiveBgList v-if="!loading" :is-route="true" :list="articalDataList" label-field="title" />
     <div v-else h-100 w-full flex-center>
-      <Icon size="30" name="svg-spinners:clock" />
+      <Icon size="30" name="svg-spinners:blocks-shuffle-3" />
     </div>
     <Transition name="fade">
       <ButtonListAni v-show="!isScrolling" v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray" @show-again="handleShowAgain">

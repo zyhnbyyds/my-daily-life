@@ -17,7 +17,7 @@ const drawerVisible = defineModel<boolean>('visible', { default: false })
       enter-active-class="transition-opacity duration-300"
       leave-active-class="transition-opacity duration-300"
     >
-      <div v-if="drawerVisible" class="absolute-0 z-999 h-full max-h-100vh w-full overflow-hidden bg-gray-800 bg-op50 blur-2" @click="drawerVisible = false" />
+      <div v-if="drawerVisible" class="absolute-0 z-999 h-full max-h-100vh w-full overflow-hidden bg-gray-800 bg-op70" @click="drawerVisible = false" />
     </Transition>
     <Transition
       enter-from-class="translate-x-100%"

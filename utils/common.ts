@@ -54,3 +54,35 @@ export function handleObjStyleToElement<T extends object>(targetObj: T, ele: Ref
     ele.value!.style[key] = targetObj[key as Keys]
   })
 }
+
+/**
+ * 保证laoding加载时间不少于(duration)默认一秒，避免一闪而过
+ * @author zhang_yu_jie
+ * @param fn promise请求函数
+ * @param status 要绑定的loading状态Ref<boolean>
+ * @param extraFn 额外的执行操作
+ * @param duration 持续时间
+ */
+export async function loadingKeep(fn: () => Promise<void>, status: Ref<boolean>, extraFn?: () => any, duration = 1000) {
+  status.value = true
+
+  const beforDate = Date.now()
+  await fn()
+  const afterDate = Date.now()
+
+  const spend = afterDate - beforDate
+
+  if (spend > duration) {
+    if (extraFn)
+      extraFn()
+
+    status.value = false
+  }
+  else {
+    setTimeout(() => {
+      if (extraFn)
+        extraFn()
+      status.value = false
+    }, duration - spend)
+  }
+}

@@ -30,7 +30,7 @@
     "consola": "^3.2.3",
     "eslint": "^8.44.0",
     "nprogress": "^0.2.0",
-    "nuxt": "^3.6.2",
+    "nuxt": "^3.6.3",
     "nuxt-typed-router": "^3.2.4",
     "pinia": "^2.1.4",
     "qrcode": "^1.5.3",

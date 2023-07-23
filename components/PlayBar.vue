@@ -81,7 +81,7 @@ function handleActiveChange(songId: number) {
     >
       <div class="scroll-style absolute-0 bottom-0 w-full overflow-y-auto p-4 pb-20">
         <div class="h-calc(100%-160px)">
-          <Transition name="fade">
+          <Transition name="fade-slide">
             <LyricsList v-if="isShowSongs" :current-time="currentTime" :lyrics="lyrics" />
             <ActiveBgList v-else :list="songList ?? []" label-field="name" value-field="id" @change="handleActiveChange" />
           </Transition>

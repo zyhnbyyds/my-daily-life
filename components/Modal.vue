@@ -12,8 +12,6 @@ const props = withDefaults(defineProps<{
 const { width, top, bgTransparent } = toRefs(props)
 
 const modelVisible = defineModel<boolean>('modelVisible', { required: true, default: false })
-
-const modalConRef = ref<HTMLElement>()
 </script>
 
 <template>

@@ -22,7 +22,7 @@ export function hadnleStringTimeToNumber(timeString: string) {
   const { cloned } = useCloned(timeString)
 
   // 提取分钟、秒钟和毫秒部分
-  const regex = /\[(\d{2}):(\d{2})\.(\d{3})\]/
+  const regex = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/
   const match = cloned.value.match(regex)
 
   if (match) {
@@ -37,4 +37,22 @@ export function hadnleStringTimeToNumber(timeString: string) {
 
   // 如果时间格式无效，则返回 null 或适当的错误值
   return -1
+}
+
+export const parttern = /\[\d{2}:\d{2}\.\d{2,3}\]/
+
+export function handleLyric(lyricGet: string | undefined) {
+  if (!lyricGet)
+    return []
+  const lyricArrays = lyricGet.split('\n')
+
+  return lyricArrays.map((item: string, index: number) => {
+    const time = hadnleStringTimeToNumber(parttern.exec(item) ? parttern.exec(item)![0] : '')
+
+    const nextItem = lyricArrays[index + 1]
+    const nextTime = nextItem ? hadnleStringTimeToNumber(parttern.exec(nextItem) ? parttern.exec(nextItem)![0] : '') : -1
+
+    const singleLyricduration = nextTime === -1 ? 2 : nextTime - time
+    return { label: item.replace(parttern, ''), time, duration: Number.parseFloat(singleLyricduration.toFixed(3)) }
+  })
 }

@@ -1,4 +1,6 @@
 <script lang='ts' setup>
+import { handleLyric } from '@/utils/music'
+
 interface SongInfo {
   lyrics: {
     label: string
@@ -33,26 +35,9 @@ const somethingAboutSong = reactive<SongInfo>({
 const likeIds = ref<number[]>([])
 const songPlayUrl = ref<string>('')
 
-const parttern = /\[\d{2}:\d{2}\.\d{3}\]/
-
 const { playing, currentTime, duration } = useMediaControls(audio, {
   src: songPlayUrl,
 })
-
-function handleLyric(lyricGet: string | undefined) {
-  if (!lyricGet)
-    return []
-  const lyricArrays = lyricGet.split('\n')
-  return lyricArrays.map((item: string, index: number) => {
-    const time = hadnleStringTimeToNumber(parttern.exec(item) ? parttern.exec(item)![0] : '')
-
-    const nextItem = lyricArrays[index + 1]
-    const nextTime = nextItem ? hadnleStringTimeToNumber(parttern.exec(nextItem) ? parttern.exec(nextItem)![0] : '') : -1
-
-    const singleLyricduration = nextTime === -1 ? 2 : nextTime - time
-    return { label: item.replace(parttern, ''), time, duration: Number.parseFloat(singleLyricduration.toFixed(3)) }
-  })
-}
 
 async function loadData() {
   const { data: res } = await useFetch<Music.SongsLikeIdList>('/proxy/music/likelist', { params: { uid: 1670075991 } })
@@ -90,10 +75,16 @@ loadData()
 </script>
 
 <template>
-  <div class="relative hw-full px-20">
-    <span class="pl-7 text-6">
+  <div class="relative hw-full">
+    <div class="w-full">
       Hi. My name is YuJie.Zhang. Nice to see you here. I am a frounted developer.
-    </span>
+    </div>
+    <TextOverflowScroll
+      text="start Hi. My name is YuJie.Zhang. Nice to see you here.
+      I am a frounted developer.Hi. My name is YuJie.Zhang.
+      Nice to see you here. I am a frounted developer.Hi. My name is YuJie.Zhang.
+      Nice to see you here. I am a frounted developer. end"
+    />
     <PlayBar
       v-model:playing="playing"
       v-model:current-time="currentTime"

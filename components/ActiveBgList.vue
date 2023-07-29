@@ -82,7 +82,7 @@ function handleClickListItem(item: ActiveBgListItem, index: number) {
   <div ref="listRef" class="relative z-2 max-w-3xl w-full flex flex-col" @mouseleave="mouseleave">
     <div
       v-for="item, i in list" :key="i"
-      class="relative z-10 cursor-pointer transition-transform duration-300" hover="scale-101 delay-150" active="scale-99"
+      class="relative z-10 cursor-pointer transition-transform duration-300" active="scale-99.6"
       @mouseover="mouseover($event, i)" @click="handleClickListItem(item, i)"
     >
       <span class="flex items-center px-3 py-3 leading-none">

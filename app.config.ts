@@ -24,6 +24,7 @@ export default defineAppConfig({
       value: '/demo',
     },
   ],
+  
   /** 头部跳转展示文字还是图标
    * @type 'text' | 'icon'
    */

@@ -104,6 +104,7 @@ fetchGetContentPage(articalStore.activeArticalPath[0])
     <div v-else h-100 w-full flex-center>
       <Icon size="30" name="svg-spinners:blocks-shuffle-3" />
     </div>
+
     <Transition name="fade">
       <ButtonListAni v-show="!isScrolling" v-model:value="activeBtn" :size="20" :list="buttons" popup-value="catagray" @show-again="handleShowAgain">
         <template #popup>
@@ -111,9 +112,11 @@ fetchGetContentPage(articalStore.activeArticalPath[0])
         </template>
       </ButtonListAni>
     </Transition>
+
     <Modal v-model:model-visible="modalVisible">
       <SelfInput v-model:value="iptVal" />
     </Modal>
+
     <Drawer v-model:visible="drawerVisible" :width="400" title="设置中心">
       <div class="h-60px flex-col-center">
         <span class="mr-5">头部样式</span>

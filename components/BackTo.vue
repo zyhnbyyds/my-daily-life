@@ -5,7 +5,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  icon: 'solar:round-arrow-left-linear',
+  icon: 'solar:round-alt-arrow-left-outline',
 })
 const flag = ref(false)
 
@@ -26,7 +26,7 @@ const backPath = computed(() => {
     >
       <Icon
         :class="flag ? '-left-0.5' : 'left-0'"
-        class="relative mr-0.3 h-4 w-4 transition-all"
+        class="relative mr-0.3 h-4 w-4 transition-all duration-200"
         :name="props.icon"
       />
       返回

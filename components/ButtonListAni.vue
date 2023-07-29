@@ -8,6 +8,7 @@ interface Props {
   position?: [number, number, number, number]
   size?: number | string
   popupValue?: string
+  popupTrigger?: 'click' | 'hover'
 }
 
 interface Emits {
@@ -16,6 +17,7 @@ interface Emits {
 
 const props = withDefaults(defineProps<Props>(), {
   size: '22px',
+  popupTrigger: 'click',
 })
 const emits = defineEmits<Emits>()
 
@@ -36,23 +38,28 @@ function hadnleClickItem(item: Components.BtnListItem) {
 
   value.value = item.value
 }
-// watch(isScrolling?.value, () => {})
 </script>
 
 <!-- 带有动画效果的按钮集合 -->
 <template>
   <div class="fixed bottom-10 left-1/2 z-10 rounded-30px bg-#eee p-3 shadow-md -translate-x-1/2 dark:bg-#555">
     <div
+      v-if="popupValue"
       :style="{ width: `${btnListRef?.offsetWidth}px` || 'auto' }"
       class="overflow-hidden transition-height duration-300"
       :class="value === popupValue && isShowPopup ? 'h-70px' : 'h-0'"
     >
-      <slot name="popup" />
+      <slot name="popup">
+        <div class="min-h-10 flex-center">
+          <!-- data empty -->
+          <div class="i-mdi:emoticon-neutral-outline" />
+        </div>
+      </slot>
     </div>
     <div ref="btnListRef" class="inline-flex gap-5">
       <div
         v-for="item, i in props.list" :key="i"
-        class="@hover:#333 flex-col-center transition-transform active:scale-105"
+        class="hover:#333 flex-col-center transition-transform active:scale-105"
         @click="hadnleClickItem(item)"
       >
         <div

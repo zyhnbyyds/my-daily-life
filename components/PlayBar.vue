@@ -16,7 +16,10 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (event: 'update:currentTime', val: number): void
-  (event: 'songChange', id: number): void }
+  (event: 'songChange', id: number): void
+  (event: 'next', id: number): void
+  (event: 'pre', id: number): void
+}
 >()
 
 const { duration, currentTime, lyrics, songPic, songName } = toRefs(props)
@@ -79,9 +82,9 @@ function handleActiveChange(songId: number) {
       class="bottom-1/2 h-full w-9/8 overflow-hidden rounded-4 trans-300 absolute-x-center -z-10 shadow-com bg-com"
       :class="{ 'w-9/7! h-140! rounded-4!': isopen }"
     >
-      <div class="scroll-style absolute-0 bottom-0 w-full overflow-y-auto p-4 pb-20">
-        <div class="h-calc(100%-160px)">
-          <Transition name="fade-slide">
+      <div class="scroll-style absolute-0 bottom-0 w-full overflow-y-auto p-3">
+        <div v-if="isopen" class="h-calc(100%-160px)">
+          <Transition name="fade">
             <LyricsList v-if="isShowSongs" :current-time="currentTime" :lyrics="lyrics" />
             <ActiveBgList v-else :list="songList ?? []" label-field="name" value-field="id" @change="handleActiveChange" />
           </Transition>

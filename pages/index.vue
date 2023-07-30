@@ -14,9 +14,6 @@ interface SongInfo {
   singer: string
 }
 
-// import { useQRCode } from '@vueuse/integrations/useQRCode'
-// import { useAppStore } from '@/stores/app'
-
 definePageMeta({
   layout: 'default',
 })
@@ -39,10 +36,13 @@ const { playing, currentTime, duration } = useMediaControls(audio, {
   src: songPlayUrl,
 })
 
+/**
+ * 初始化歌曲列表
+ */
 async function loadData() {
-  const { data: res } = await useFetch<Music.SongsLikeIdList>('/proxy/music/likelist', { params: { uid: 1670075991 } })
+  const { data: res } = await useFetch<Music.SongsLikeIdList>('/music/likelist', { params: { uid: 1670075991 } })
   likeIds.value = res.value ? res.value.ids : []
-  const { data: song } = await useFetch<Music.SongDetailList>('/proxy/music/song/detail', { params: { ids: likeIds.value ? likeIds.value.join(',') : '' } })
+  const { data: song } = await useFetch<Music.SongDetailList>('/music/song/detail', { params: { ids: likeIds.value ? likeIds.value.join(',') : '' } })
 
   somethingAboutSong.likeList = song.value ? song.value.songs : []
 
@@ -50,11 +50,16 @@ async function loadData() {
     handleSongChange(toValue(likeIds)[0])
 }
 
-async function handleSongChange(id: number) {
+/**
+ * 点击进行歌曲切换
+ * @param id 歌曲id
+ * @param paly 切换后是否播放
+ */
+async function handleSongChange(id: number, play?: boolean) {
   playing.value = false
-  const { data: lyrics } = await useFetch<Music.SongLyric>('/proxy/music/lyric', { params: { id } })
-  const { data: playUrl } = await useFetch<Music.SongPlayUrl>('/proxy/music/song/url', { params: { id } })
-  const { data: songDetail } = await useFetch<Music.SongDetailList>('/proxy/music/song/detail', { params: { ids: id } })
+  const { data: lyrics } = await useFetch<Music.SongLyric>('/music/lyric', { params: { id } })
+  const { data: playUrl } = await useFetch<Music.SongPlayUrl>('/music/song/url', { params: { id } })
+  const { data: songDetail } = await useFetch<Music.SongDetailList>('/music/song/detail', { params: { ids: id } })
 
   const currentSong = songDetail.value ? songDetail.value.songs[0] : null
   songPlayUrl.value = playUrl.value ? playUrl.value.data[0].url : ''
@@ -67,7 +72,8 @@ async function handleSongChange(id: number) {
   })
 
   nextTick(() => {
-    playing.value = true
+    if (play)
+      playing.value = true
   })
 }
 
@@ -79,12 +85,11 @@ loadData()
     <div class="w-full">
       Hi. My name is YuJie.Zhang. Nice to see you here. I am a frounted developer.
     </div>
-    <TextOverflowScroll
-      text="start Hi. My name is YuJie.Zhang. Nice to see you here.
-      I am a frounted developer.Hi. My name is YuJie.Zhang.
-      Nice to see you here. I am a frounted developer.Hi. My name is YuJie.Zhang.
-      Nice to see you here. I am a frounted developer. end"
-    />
+
+    <button class="border-com btn" @click="$router.push('/music/login')">
+      登录
+    </button>
+
     <PlayBar
       v-model:playing="playing"
       v-model:current-time="currentTime"
@@ -94,14 +99,10 @@ loadData()
       :song-pic="somethingAboutSong.pic"
       :singer="somethingAboutSong.singer"
       :song-list="somethingAboutSong.likeList"
-      @song-change="handleSongChange"
+      @song-change="handleSongChange($event, true)"
     />
+
     <audio ref="audio" />
-    <!-- TODO task list <br>
-      1. md file image preview [md文件的图片预览] done
-      2. demo page thumbnail add [demo页面的缩略图预览]
-      3. 音乐播放器的实现
-    -->
   </div>
 </template>
 

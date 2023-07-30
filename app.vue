@@ -7,7 +7,6 @@ useHead({
 })
 
 const route = useRoute()
-
 useSeoMeta({
   title: '我的生活日记',
   description: '我的生活日记, 博客, 生活, blob daily life',

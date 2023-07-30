@@ -6,3 +6,4 @@ dist
 .env
 .idea/
 content/.obsidian/*
+.env.prod

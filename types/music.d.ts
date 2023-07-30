@@ -267,6 +267,15 @@ declare namespace Music {
     checkPoint: number
     code: number
   }
+
+  /**
+   * 登录二维码链接获取
+   */
+  interface LoginQrcodeUrl {
+    /** 登陆二维码 */
+    qrurl: string
+    qrimg: string
+  } 
 }
 
   

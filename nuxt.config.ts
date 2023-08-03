@@ -65,7 +65,7 @@ export default defineNuxtConfig({
       routes: ['/', '/artical', '/demo'],
     },
     devProxy: {
-      '/music': { target: 'https://wang-yi-api-git-master-zhang771.vercel.app/', changeOrigin: true },
+      '/music': { target: 'http://localhost:3000', changeOrigin: true },
     },
   },
 

@@ -24,7 +24,7 @@ const activeIndex = ref<string>(handlePathGetFirst(path))
           {{ data.label }}
         </div>
         <div v-else-if="app.isHeaderTextOrIcon === 'icon'">
-          <Icon :name="data.icon" />
+          <Icon :name="data.icon ?? 'emojione:broken-heart'" />
         </div>
       </template>
     </Tab>

@@ -50,6 +50,8 @@ watch(() => route.path, (_path) => {
         </NuxtLayout>
       </div>
     </div>
+
+    <div class="absolute-0 h-10 w-10 bg-red" />
   </div>
 </template>
 

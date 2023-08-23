@@ -14,6 +14,10 @@ const demos = reactive([
     name: '动画按钮',
     path: '/demo/ButtonListAni',
   },
+  {
+    name: '旋转音乐头像',
+    path: '/demo/RotateMusicAva',
+  },
 ])
 </script>
 
@@ -21,7 +25,7 @@ const demos = reactive([
   <div grid="~ cols-10 rows-7" class="hw-full gap-5">
     <div v-for="item in demos" :key="item.path">
       <NuxtLink :to="item.path">
-        <div class="trans-300 h-full w-full flex-center rounded-md bg-light-blue-100 text-14px text-#333 hover:scale-105">
+        <div class="h-full w-full flex-center rounded-md bg-light-blue-100 text-14px text-#333 trans-300 hover:scale-105">
           {{ item.name }}
         </div>
       </NuxtLink>

@@ -83,8 +83,17 @@ export default defineNuxtConfig({
     },
   },
 
+  imports: {
+    autoImport: true,
+    presets: ['vitest'],
+  },
+
   devtools: {
     enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
   },
 
   css: [
@@ -101,4 +110,6 @@ export default defineNuxtConfig({
     'tokens.config.ts',
     'app.config.ts',
   ],
+
+  test: true,
 })

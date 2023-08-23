@@ -35,6 +35,7 @@ export default defineConfig({
     presetAttributify(),
     presetIcons({
       scale: 1.2,
+      prefix: ['i-', ''],
     }),
     presetTypography(),
     presetWebFonts({

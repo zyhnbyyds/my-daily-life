@@ -41,7 +41,7 @@ watch(() => route.path, (_path) => {
 
 <template>
   <div class="h-full w-full font-mono">
-    <Header :paths="paths" />
+    <Header :show="false" :paths="paths" />
     <div ref="toTopRef" class="scroll-style h-[calc(100vh-5rem)] overflow-y-auto">
       <ToTop :top="y" @go-top="y = 0" />
       <div class="h-full pb-6">

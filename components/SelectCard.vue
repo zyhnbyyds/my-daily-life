@@ -23,7 +23,6 @@ const emits = defineEmits<Emits>()
 
 const { list, customClass, muti } = toRefs(props)
 
-// const values = ref(toValue(list).length > 0 ? [toValue(list)[0].value] : [])
 const values = defineModel<string[]>('values')
 
 function handleClickFn(targetItem: MutiSelectCardItem) {

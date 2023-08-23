@@ -1,16 +1,11 @@
 import { defineTheme } from 'pinceau'
 
 export default defineTheme({
-  prose: {
-    h2: {
-      fontSize: '{typography.fontSize.2xl}',
-      fontWeight: '500',
-    },
-    h3: {
-      fontSize: '20px',
-    },
-    p: {
-      fontSize: '15px',
+  typography: {
+    font: {
+      body: '{typography.font.sans}',
+      code: '{typography.font.mono}',
+      display: '{typography.font.sans}',
     },
   },
 })

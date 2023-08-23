@@ -1,10 +1,8 @@
 <script setup lang="ts">
 const color = useColorMode()
-const { next, state } = useCycleList(['light', 'dark'], { initialValue: color.value })
 
 function toggleDark() {
-  next()
-  color.preference = state.value
+  color.preference = color.value === 'dark' ? 'light' : 'dark'
 }
 </script>
 

@@ -66,6 +66,7 @@ export default defineNuxtConfig({
     },
     devProxy: {
       '/music': { target: 'http://localhost:3000', changeOrigin: true },
+      '/apiMock': { target: 'https://mock.apifox.cn/m1/2211298-0-default', changeOrigin: true },
     },
   },
 

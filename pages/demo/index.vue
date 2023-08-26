@@ -18,6 +18,10 @@ const demos = reactive([
     name: '旋转音乐头像',
     path: '/demo/RotateMusicAva',
   },
+  {
+    name: '聊天界面',
+    path: '/demo/ChatRoom',
+  },
 ])
 </script>
 

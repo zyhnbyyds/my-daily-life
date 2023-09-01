@@ -51,6 +51,7 @@
   },
   "lint-staged": {
     "*.{ts,js,vue}": [
+      "vitest related --run",
       "vue-tsc --noEmit",
       "eslint --fix"
     ]

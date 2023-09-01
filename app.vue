@@ -56,4 +56,9 @@ watch(() => route.path, (_path) => {
 </template>
 
 <style scoped>
+html.dark {
+    --w-e-textarea-bg-color: #333;
+    --w-e-textarea-color: #fff;
+    /* ...其他... */
+}
 </style>

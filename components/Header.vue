@@ -18,7 +18,7 @@ const activeIndex = ref<string>(handlePathGetFirst(path))
 
 <template>
   <Transition>
-    <div class="flex justify-center font-600">
+    <div class="flex justify-center py2 font-600">
       <Tab v-model:value="activeIndex" :follow-change="true" :is-route="true" :tabs="props.paths">
         <template #extra>
           <DarkToggle class="px-2" />

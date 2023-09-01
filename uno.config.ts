@@ -2,13 +2,12 @@ import {
   defineConfig,
   presetAttributify,
   presetIcons,
-  presetTypography,
   presetUno,
   presetWebFonts,
-  presetWind,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { presetScrollbar } from 'unocss-preset-scrollbar'
 
 export default defineConfig({
   shortcuts: [
@@ -37,7 +36,6 @@ export default defineConfig({
       scale: 1.2,
       prefix: ['i-', ''],
     }),
-    presetTypography(),
     presetWebFonts({
       fonts: {
         sans: 'DM Sans',
@@ -45,7 +43,7 @@ export default defineConfig({
         mono: 'DM Mono',
       },
     }),
-    presetWind(),
+    presetScrollbar(),
   ],
   transformers: [
     transformerDirectives(),

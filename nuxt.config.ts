@@ -9,9 +9,7 @@ export default defineNuxtConfig({
     shim: true,
   },
 
-  extends: [
-    '@nuxt-themes/typography',
-  ],
+  ssr: false,
 
   modules: [
     '@vueuse/nuxt',
@@ -28,6 +26,7 @@ export default defineNuxtConfig({
         ['defineStore', 'definePiniaStore'],
       ],
     }],
+    'nuxt-vitest',
   ],
 
   content: {
@@ -97,15 +96,14 @@ export default defineNuxtConfig({
     },
   },
 
+  extends: ['@nuxt-themes/typography'],
+
   css: [
     '@/assets/css/main.css',
     '@/assets/css/transition.css',
     'nprogress/nprogress.css',
+    '@wangeditor/editor/dist/css/style.css',
   ],
-
-  image: {
-    provider: 'netlify',
-  },
 
   watch: [
     'tokens.config.ts',

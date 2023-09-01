@@ -22,6 +22,10 @@ const demos = reactive([
     name: '聊天界面',
     path: '/demo/ChatRoom',
   },
+  {
+    name: '基于icons和富文本编辑器的表情输入',
+    path: '/demo/Emoji',
+  },
 ])
 </script>
 

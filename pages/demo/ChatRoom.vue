@@ -1,6 +1,4 @@
 <script lang='ts' setup>
-import { useFn } from '../../composables/useFn'
-
 /**
  * 消息项
  */
@@ -39,8 +37,6 @@ const ddd = reactive({
   name: 'zzz',
   age: 2,
 })
-
-const { test } = useFn(ddd)
 
 function handleClickSendBtn() {
   if (data.value) {
@@ -121,6 +117,7 @@ onMounted(() => {
         <button class="absolute bottom-2 right-5 rounded-md bg-dark-100 px-4 py-2 hover:bg-op60" @click="handleClickSendBtn">
           发送
         </button>
+        <div>你好</div>
       </footer>
     </div>
   </div>

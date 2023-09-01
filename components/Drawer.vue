@@ -39,7 +39,7 @@ const drawerVisible = defineModel<boolean>('visible', { default: false })
                   {{ title }}
                 </span>
               </div>
-              <Icon class="cursor-pointer font-thin" hover:bg-my-20 size="24" name="carbon:close" @click="drawerVisible = false" />
+              <Icon class="cursor-pointer font-thin" hover="bg-my-20 rounded" size="24" name="carbon:close" @click="drawerVisible = false" />
             </div>
           </slot>
         </header>

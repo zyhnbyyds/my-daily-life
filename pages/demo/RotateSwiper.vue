@@ -29,7 +29,7 @@ function handleSlideChange(e: any) {
         铂金
       </div>
     </div>
-    <Swiper class="h-100px" @slideChange="handleSlideChange">
+    <Swiper class="h-100px" @slide-change="handleSlideChange">
       <SwiperSlide v-for="item in 3" :key="item" bg-cool-gray>
         {{ item }}
       </SwiperSlide>

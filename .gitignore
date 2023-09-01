@@ -7,3 +7,4 @@ dist
 .idea/
 content/.obsidian/*
 .env.prod
+coverage/*

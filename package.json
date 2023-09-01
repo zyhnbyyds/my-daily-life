@@ -36,6 +36,7 @@
     "eslint": "^8.48.0",
     "happy-dom": "^10.11.0",
     "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
     "nprogress": "^0.2.0",
     "nuxt": "^3.7.0",
     "nuxt-typed-router": "^3.3.1",
@@ -47,5 +48,11 @@
     "unplugin-icons": "^0.16.5",
     "vitest": "^0.34.3",
     "vue-tsc": "^1.8.8"
+  },
+  "lint-staged": {
+    "*.{ts,js,vue}": [
+      "vue-tsc --noEmit",
+      "eslint --fix"
+    ]
   }
 }

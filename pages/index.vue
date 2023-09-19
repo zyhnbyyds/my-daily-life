@@ -10,6 +10,12 @@
       Hi. My name is YuJie.Zhang. Nice to see you here. I am a frounted developer.
     </div>
 
+    <ProseCode>
+      <div class="w-full text-center">
+        Hi. My name is YuJie.Zhang. Nice to see you here. I am a frounted developer.
+      </div>
+    </ProseCode>
+
     <!-- <PlayBar
       v-model:playing="playing"
       v-model:current-time="currentTime"

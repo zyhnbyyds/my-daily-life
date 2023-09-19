@@ -44,6 +44,7 @@
     "pinia": "^2.1.6",
     "qrcode": "^1.5.3",
     "typescript": "^5.2.2",
+    "unocss": "^0.55.7",
     "unocss-preset-scrollbar": "^0.2.1",
     "unplugin-icons": "^0.16.5",
     "vitest": "^0.34.3",

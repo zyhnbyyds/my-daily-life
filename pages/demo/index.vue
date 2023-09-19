@@ -26,6 +26,10 @@ const demos = reactive([
     name: '基于icons和富文本编辑器的表情输入',
     path: '/demo/Emoji',
   },
+  {
+    name: '跟随鼠标移动的弹出框实现',
+    path: '/demo/MoveWithMouse',
+  },
 ])
 </script>
 

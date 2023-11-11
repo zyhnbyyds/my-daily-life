@@ -30,6 +30,10 @@ const demos = reactive([
     name: '跟随鼠标移动的弹出框实现',
     path: '/demo/MoveWithMouse',
   },
+  {
+    name: '点赞特效',
+    path: '/demo/LikeAni',
+  },
 ])
 </script>
 

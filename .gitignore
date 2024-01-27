@@ -8,3 +8,4 @@ dist
 content/.obsidian/*
 .env.prod
 coverage/*
+.pnpm-lock.yaml

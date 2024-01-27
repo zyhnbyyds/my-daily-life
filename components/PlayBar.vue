@@ -34,9 +34,9 @@ const currentTimeAct = computed({
 })
 
 const playing = defineModel<boolean>('playing', { default: false })
-const [isopen, toggole] = useToggle(true)
+const [isOpen, toggle] = useToggle(true)
 const maskRef = ref<HTMLElement | null>(null)
-const [isShowSongs, toggoleSongShow] = useToggle(false)
+const [isShowSongs, toggleSongShow] = useToggle(false)
 
 function handleActiveChange(songId: number) {
   emits('songChange', songId)
@@ -54,10 +54,10 @@ function handleActiveChange(songId: number) {
       </div>
       <div class="h-48px min-w-366px flex-col-center justify-between rounded-8px bg-black bg-op25 px-6px py-5px">
         <div flex-col-center>
-          <div relative h-33px w-33px rounded-6px @click="toggole()" @mouseleave="maskRef!.style.display = 'none'" @mouseover="maskRef!.style.display = 'flex'">
+          <div relative h-33px w-33px rounded-6px @click="toggle()" @mouseleave="maskRef!.style.display = 'none'" @mouseover="maskRef!.style.display = 'flex'">
             <img class="h-full w-full" :src="songPic">
             <div ref="maskRef" absolute-0 hidden h-full w-full items-center justify-center bg-black bg-op20 transition-all dark:bg-op40>
-              <Icon v-if="!isopen" animate-bounce name="solar:double-alt-arrow-up-outline" />
+              <Icon v-if="!isOpen" animate-bounce name="solar:double-alt-arrow-up-outline" />
               <Icon v-else animate-bounce name="solar:double-alt-arrow-down-outline" />
             </div>
           </div>
@@ -74,16 +74,16 @@ function handleActiveChange(songId: number) {
       </div>
       <div class="flex gap-34px">
         <Icon size="22" name="material-symbols:computer-outline-rounded" />
-        <Icon size="22" name="material-symbols:format-list-bulleted-rounded" @click="toggoleSongShow()" />
+        <Icon size="22" name="material-symbols:format-list-bulleted-rounded" @click="toggleSongShow()" />
         <Icon size="22" name="carbon:volume-up" />
       </div>
     </div>
     <div
       class="bottom-1/2 h-full w-9/8 overflow-hidden rounded-4 trans-300 absolute-x-center -z-10 shadow-com bg-com"
-      :class="{ 'w-9/7! h-140! rounded-4!': isopen }"
+      :class="{ 'w-9/7! h-140! rounded-4!': isOpen }"
     >
       <div class="scroll-style absolute-0 bottom-0 w-full overflow-y-auto p-3">
-        <div v-if="isopen" class="h-calc(100%-160px)">
+        <div v-if="isOpen" class="h-calc(100%-160px)">
           <Transition name="fade">
             <LyricsList v-if="isShowSongs" :current-time="currentTime" :lyrics="lyrics" />
             <ActiveBgList v-else :list="songList ?? []" label-field="name" value-field="id" @change="handleActiveChange" />

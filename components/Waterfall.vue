@@ -3,19 +3,19 @@ import { arrFindNum } from '~/utils/common'
 
 export interface Props {
   emptyImgUrl?: string
-  data: WaterflowItem[]
+  data: WaterfallItem[]
   /** 没有_path地址的时候的重定向位置 */
   pathRedirect?: string
 }
 
-export interface WaterflowItem {
+export interface WaterfallItem {
   title: string
   imgUrl: string
   _path: string
   createTime?: string
 }
 
-interface WaterflowItemWithHW extends WaterflowItem {
+interface WaterfallItemWithHW extends WaterfallItem {
   reverseRatio: number
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -29,7 +29,7 @@ const res = await Promise.all(props.data.map(async (item) => {
   const { height, width } = await getMeta(item.imgUrl)
   const reverseRatio = (height / width) * 1000
 
-  return { ...item, reverseRatio } as WaterflowItemWithHW
+  return { ...item, reverseRatio } as WaterfallItemWithHW
 }))
 
 const lifeDataList = ref(res)
@@ -59,7 +59,7 @@ const actShowList = computed(() => {
     return [[]]
   const dataLength = lifeDataList.value.length
 
-  const arr: WaterflowItem[][] = []
+  const arr: WaterfallItem[][] = []
   const remHeight: number[] = []
   for (let index = 0; index < activeCol.value; index++) {
     remHeight.push(0)

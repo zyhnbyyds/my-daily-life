@@ -1,11 +1,11 @@
 <script lang='ts' setup>
-import type { WaterflowItem } from '~/components/Waterfall.vue'
+import type { WaterfallItem } from '~/components/Waterfall.vue'
 
 definePageMeta({
   layout: 'default',
 })
 
-const lifeDataList = ref((await queryContent<WaterflowItem>('life').only(['_path', 'title', 'createTime', 'imgUrl']).find() as unknown as WaterflowItem[]))
+const lifeDataList = ref((await queryContent<WaterfallItem>('life').only(['_path', 'title', 'createTime', 'imgUrl']).find() as unknown as WaterfallItem[]))
 </script>
 
 <template>

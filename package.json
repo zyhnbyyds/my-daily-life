@@ -34,7 +34,7 @@
     "@wangeditor/editor-for-vue": "^5.1.12",
     "consola": "^3.2.3",
     "eslint": "^8.53.0",
-    "happy-dom": "^10.11.2",
+    "happy-dom": "^15.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "nprogress": "^0.2.0",
